@@ -1,0 +1,67 @@
+	#topbar{
+		background-color: #fff;
+		height:40px;
+	}
+
+	body {
+		margin:200px;
+		font-family: arial,helvetica,sans-serif;
+		background-image: url("fondo1.jpg");
+		background-repeat: no-repeat;
+		background-size: 100%;
+		margin:0 auto;
+	}
+
+
+	form{
+		width:60%;
+		height:30%;
+	}
+
+	table{
+		padding-left: 29%;
+	}
+
+
+	.move {
+		background-color: #fff;
+		opacity: 0.9;
+		text-align: center;
+		padding-top: 15px;
+		padding-left: 20px;
+		margin-left: 50%;
+		border-top: 7px solid #405473;
+	}
+
+	#sub{
+		background-color: #405473;
+		color:#fff;
+		font-weight: 500;
+		font-size: 1.2em;
+	}
+
+	h1 {
+		font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+		font-size: 3em;
+		font-weight: 500;
+		color:#4C4C4C;
+		line-height: 26px;
+	}
+
+	img {
+		width:80px;
+		height:80px;
+		padding-top:30px;
+		padding-left: 220px;
+		float:relative;
+	}
+
+
+	 fieldset {
+	 	text-align: left;
+	 	font-size: 1em;
+	 	display:inline-block;
+	 	position:fixed;
+	 	box-shadow:0 0 10px #666;
+
+	 }
