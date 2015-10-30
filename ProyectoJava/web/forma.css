@@ -1,0 +1,69 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26-oct-2015, 20:00:13
+    Author     : Adriana, Mayra y Roberto
+*/
+
+form>div{
+	margin-left: 15%;
+	margin-right: 15%;
+	color:#4C4C4C;
+}
+
+fieldset{
+	border-color: #909dec;
+	border-width: 2px;
+}
+
+div>h1{
+	color:#1A1a1a;
+	size:32px;
+	text-align: center;
+	font-weight: 600;
+}
+
+legend{
+	font:"tw cen ms";
+	font-size: 23px;
+	font-weight: 700;
+	color:#1A1A1A;
+}
+table{
+	font-weight: 600;
+	font-size: 19px;
+	padding-left: 10%;
+}
+td{
+	padding-right: 20px;
+}
+
+input ,textarea{
+	width:210px;
+}
+
+#envia{
+	background-color:#909dec;
+	border:none;
+	color:#fff;
+	font-size: 19px;
+	height:35px;
+}
+
+a:hover{
+    color:blueviolet;
+}
+a:click{
+    color:blueviolet;
+}
+a:visited
+{
+    color:grey;
+}
+a:active
+{
+    color:grey;
+}
