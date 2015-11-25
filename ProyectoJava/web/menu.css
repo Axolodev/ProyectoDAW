@@ -86,18 +86,29 @@ ul li ul {
   -ms-transition: opacity 0.2s;
   -o-transition: opacity 0.2s;
   -transition: opacity 0.2s;
+  color: #FFF;
 }
 ul li ul li { 
   background: #656EA5; 
   display: block; 
-    font-size:15px;
+  font-size:15px;
   color: #fff;
   text-shadow: 0 -1px 0 #000;
+}
+
+ul li ul li a { 
+  color: #fff;
+  text-shadow: 0 -1px 0 #000;
+  text-decoration : none;
 }
 
 ul>li>ul>li:hover{
 background-color: #939AC0;
 z-index: 3;
+}
+
+ul>li>ul>li>a:hover{
+color:#fff;
 }
 
 ul li:hover ul {

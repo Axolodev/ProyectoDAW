@@ -26,25 +26,25 @@
           <li>
             Candidatos
             <ul>
-                <li><a href="nuevoCandidato.jsp">Agregar nuevo</a></li>
+                <li><a href="nuevoCandidato.jsp">Agregar Nuevo</a></li>
                 <li><a href="editaCandidato.jsp">Modificar/Eliminar</a></li>
             </ul>
           </li>
           <li>Entrevista
             <ul>
                 <li><a href="nuevaEntrevista.jsp">Agendar</a></li>
-              <li>Modificar existente</li>
+                <li><a href="#">Modificar existente</a></li>
             </ul>
          </li>
         <li>Empleados
           <ul>
-            <li>Agregar</li>
-            <li>Modificar/Eliminar</li>
+              <li><a href="#">Agregar</a></li>
+              <li><a href="#">Modificar/Eliminar</a></li>
           </ul>
         </li>          
         <li>Reportes
           <ul>
-            <li>Generar</li>
+              <li><a href="#">Generar</a></li>
           </ul>
         </li>
       </ul>
