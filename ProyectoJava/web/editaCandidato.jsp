@@ -88,8 +88,6 @@
             height: 50px;
         }
     </style>
-
-
     <script>
         // Aqui se obtienen los datos.
         // Generados manualmente para pruebas
@@ -186,42 +184,41 @@
 </head>
 
 <body onload="llenaTabla(); deshabilitaForma()">
-    <div id="barra1">
+    <div id="barra1"> 
         <div id="barra1-2">
-            <button class="btn"><i class="fa fa-home"></i></button>
-            <button class="btn"><i class="fa fa-cog"></i></button>
-            <button class="btn"><i class="fa fa-sign-out"></i></button>
-        </div>
-    </div>
-    <div id="barra2">
+            <a href="Home.jsp"><i class="fa fa-home" style="font-size:30px"></i></a>
+            <a href="Configuracion.jsp"><i class="fa fa-cog" style="font-size:30px"></i></a>
+            <a href="Login.jsp"><i class="fa fa-sign-out" style="font-size:30px"></i></a> 
+        </div> 
+      </div>
+      <div id="barra2">   
         <ul>
-            <li>
-                Candidatos
-                <ul>
-                    <li>Agregar nuevo</li>
-                    <li>Modificar/Eliminar</li>
-                </ul>
-            </li>
-            <li>Entrevista
-                <ul>
-                    <li>Agendar</li>
-                    <li>Modificar existente</li>
-                </ul>
-            </li>
-            <li>Empleados
-                <ul>
-                    <li>Agregar</li>
-                    <li>Modificar/Eliminar</li>
-                </ul>
-            </li>
-            <li>Reportes
-                <ul>
-                    <li>Generar</li>
-                </ul>
-            </li>
-        </ul>
+          <li>
+            Candidatos
+            <ul>
+                <li><a href="nuevoCandidato.jsp">Agregar Nuevo</a></li>
+                <li><a href="editaCandidato.jsp">Modificar/Eliminar</a></li>
+            </ul>
+          </li>
+          <li>Entrevista
+            <ul>
+                <li><a href="nuevaEntrevista.jsp">Agendar</a></li>
+                <li><a href="#">Modificar existente</a></li>
+            </ul>
+         </li>
+        <li>Empleados
+          <ul>
+              <li><a href="#">Agregar</a></li>
+              <li><a href="#">Modificar/Eliminar</a></li>
+          </ul>
+        </li>          
+        <li>Reportes
+          <ul>
+              <li><a href="#">Generar</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-    <br/>
     <h1 style="margin-left:25%;">Edita o Elimina Candidato</h1>
     <div id="main_container">
         <table id="clientes">
