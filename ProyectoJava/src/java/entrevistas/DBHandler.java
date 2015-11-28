@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.eclipse.jdt.internal.compiler.lookup.TypeConstants;
@@ -382,7 +383,161 @@ public class DBHandler {
     }
 
     //</editor-fold>
-    
     //<editor-fold desc="Entrevistas">
+    /**
+     * editaCanadiato(Candidato cand) Funcion que realiza un update a la tabla
+     * candidatos recibe de paramtero un candidato que se recibe de la interfaz
+     */
+    public static void editaEntrevista(Entrevista ent) {
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+
+            Statement st = con.createStatement();
+            String sql;
+            sql = "update candidato set "; // Where id is x ?
+            sql += "idCandidato=" + ent.getIdCandidato() + ",";
+            sql += "idUsuario=" + ent.getIdUsuario()+ ",";
+            sql += "plataforma=" + ent.getPlataforma() + ",";
+            sql += "fecha=" + ent.getFecha() + ",";
+            sql += "feedback=" + ent.getFeedback() + ",";
+            sql += "where id = " + ent.getIdEntrevista();
+            st.executeUpdate(sql);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * nuevoCandidato(Candidato cand) funcion que inserta un candidato a la
+     * tabla candidato
+     *
+     * @param cand
+     */
+    public static void nuevaEntrevista(Entrevista ent) {
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            Statement st = con.createStatement();
+            String sql;
+            int id = getMaxIdEntrevista();
+            sql = "insert into entrevista values(";
+            sql += "id = " + id;
+            sql += "idCandidato=" + ent.getIdCandidato() + ",";
+            sql += "idUsuario=" + ent.getIdUsuario() + ",";
+            sql += "fecha=" + ent.getFecha() + ",";
+            sql += "plataforma=" + ent.getPlataforma() + ",";
+            sql += "feedback=" + ent.getFeedback();
+            st.executeUpdate(sql);
+            st.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * getMaxIdCandidato() calcula el id máximo exixstente en la tabla le suma
+     * uno, y regresa el id que debe ser insertado
+     *
+     * @return int
+     */
+    public static int getMaxIdEntrevista() {
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        int id = 0;
+        try {
+            Statement st = con.createStatement();
+            String sql;
+            sql = "Select count(*) from entrevista";
+            ResultSet results = st.executeQuery(sql);
+            id = results.getInt(1) + 1;
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
+    /**
+     * Dado un id, regresa el resto de los datos del candidato y los almacena en
+     * una variable de tipo Candidato
+     *
+     * @param id
+     * @return Candidato
+     */
+    public static Entrevista verEntrevista(int id) {
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        Entrevista ent = null;
+        try {
+            Statement st = con.createStatement();
+            String sql;
+            sql = "Select a.nombre,b.nombre,a.puesto,c.fecha,c.plataforma,c.feedback"
+                    + "from candidato as a,usuario as b,entrevista as c"
+                    + " where id = " + id + "and c.idCandidato = a.id and c.idUsuario = b.id";
+            ResultSet results = st.executeQuery(sql);
+            String nombreCand = results.getString(1);
+            String nombreEnt = results.getString(2);
+            Date fecha = results.getDate(3);
+            String plataforma = results.getString(4);
+            String feedback = results.getString(5);
+            
+            //convierte nombres en id's
+          
+            ent = new Entrevista(nombreCand,nombreEnt,fecha,plataforma,feedback);
+
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ent;
+    }
+
+    /**
+     * borraCandidatos(id) funcion qie borra un candidato dado un id
+     *
+     * @param id
+     */
+    public static void borraEntrevista(int id) {
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            Statement st = con.createStatement();
+            String sql;
+            sql = "delete from entrevista where id = " + id;
+            st.executeUpdate(sql);
+            st.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     //</editor-fold>
 }

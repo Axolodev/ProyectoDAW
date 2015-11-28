@@ -10,78 +10,102 @@ package entrevistas;
  * @author Adriana
  */
 import java.util.Date;
+
 public class Entrevista {
+
+    private int idEntrevista;
+    private int idCandidato;
+    private int idUsuario;
     private String nombreCandidato;
     private String nombreEntrevistador;
-    private String puestoCandidato;
-    private Date fechaEntrevista;
+    private Date fecha;
     private String plataforma;
     private String feedback;
+
+    public Entrevista(int idEntrevista, String nombreCandidato, String nombreEntrevistador, Date fecha, String plataforma, String feedback) {
+        this.idEntrevista = idEntrevista;
+        this.nombreCandidato = nombreCandidato;
+        this.nombreEntrevistador = nombreEntrevistador;
+        this.fecha = fecha;
+        this.plataforma = plataforma;
+        this.feedback = feedback;
+    }
     
-    public Entrevista()
-    {
-        nombreCandidato = "";
-        nombreEntrevistador = "";
-        puestoCandidato = "";
-        fechaEntrevista = null;
-        plataforma = "";
-        feedback = "";
+    public Entrevista(int idEntrevista, int idCandidato, int idUsuario, String nombreCandidato, String nombreEntrevistador, Date fecha, String plataforma, String feedback) {
+        this.idEntrevista = idEntrevista;
+        this.idCandidato = idCandidato;
+        this.idUsuario = idUsuario;
+        this.nombreCandidato = nombreCandidato;
+        this.nombreEntrevistador = nombreEntrevistador;
+        this.fecha = fecha;
+        this.plataforma = plataforma;
+        this.feedback = feedback;
     }
-    public Entrevista(String nC, String nE,String pC,Date fE, String p, String f)
-    {
-        nombreCandidato = nC;
-        nombreEntrevistador = nE;
-        puestoCandidato = pC;
-        fechaEntrevista = fE;
-        plataforma = p;
-        feedback = f;
+
+    
+    public int getIdEntrevista() {
+        return idEntrevista;
     }
-    public void setNombreCandidato(String nC)
-    {
-        nombreCandidato = nC;
+
+    public void setIdEntrevista(int idEntrevista) {
+        this.idEntrevista = idEntrevista;
     }
-    public void setNombreEntrevistador(String nE)
-    {
-        nombreEntrevistador = nE;
+
+    public int getIdCandidato() {
+        return idCandidato;
     }
-    public void setPuestoCandidato(String pC)
-    {
-        puestoCandidato = pC;
+
+    public void setIdCandidato(int idCandidato) {
+        this.idCandidato = idCandidato;
     }
-    public void setFechaEntrevista(Date fE)
-    {
-        fechaEntrevista = fE;
+
+    public int getIdUsuario() {
+        return idUsuario;
     }
-    public void setPlataforma(String p)
-    {
-        plataforma = p;
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
-    public void setFeedback(String f)
-    {
-        feedback = f;
-    }
-    public String getNombreCandidato()
-    {
+
+    public String getNombreCandidato() {
         return nombreCandidato;
     }
-    public String getNombreEntrevistador()
-    {
+
+    public void setNombreCandidato(String nombreCandidato) {
+        this.nombreCandidato = nombreCandidato;
+    }
+
+    public String getNombreEntrevistador() {
         return nombreEntrevistador;
     }
-    public String getPuestoCandidato()
-    {
-        return puestoCandidato;
+
+    public void setNombreEntrevistador(String nombreEntrevistador) {
+        this.nombreEntrevistador = nombreEntrevistador;
     }
-    public Date getFechaEntrevista()
-    {
-        return fechaEntrevista;
+
+    public Date getFecha() {
+        return fecha;
     }
-    public String getPlataforma()
-    {
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getPlataforma() {
         return plataforma;
     }
-    public String getFeedback()
-    {
+
+    public void setPlataforma(String plataforma) {
+        this.plataforma = plataforma;
+    }
+
+    public String getFeedback() {
         return feedback;
     }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+    
+    
 }
