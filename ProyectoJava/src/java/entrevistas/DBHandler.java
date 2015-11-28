@@ -383,6 +383,7 @@ public class DBHandler {
     }
 
     //</editor-fold>
+    
     //<editor-fold desc="Entrevistas">
     /**
      * editaCanadiato(Candidato cand) Funcion que realiza un update a la tabla
@@ -494,19 +495,21 @@ public class DBHandler {
         try {
             Statement st = con.createStatement();
             String sql;
-            sql = "Select a.nombre,b.nombre,a.puesto,c.fecha,c.plataforma,c.feedback"
+            sql = "Select a.id,a.nombre,b.id,b.nombre,c.fecha,c.plataforma,c.feedback,c.id"
                     + "from candidato as a,usuario as b,entrevista as c"
                     + " where id = " + id + "and c.idCandidato = a.id and c.idUsuario = b.id";
             ResultSet results = st.executeQuery(sql);
-            String nombreCand = results.getString(1);
-            String nombreEnt = results.getString(2);
-            Date fecha = results.getDate(3);
-            String plataforma = results.getString(4);
-            String feedback = results.getString(5);
+            int idCand = results.getInt(1);
+            String nombreCand = results.getString(2);
+            int idEnt = results.getInt(3);
+            String nombreEnt = results.getString(4);
+            Date fecha = results.getDate(5);
+            String plataforma = results.getString(6);
+            String feedback = results.getString(7);
+            int idEntrevista = results.getInt(8);
             
-            //convierte nombres en id's
+            ent = new Entrevista(idEntrevista,idCand,idEnt,nombreCand,nombreEnt,fecha,plataforma,feedback);
           
-            ent = new Entrevista(nombreCand,nombreEnt,fecha,plataforma,feedback);
 
             st.close();
         } catch (SQLException ex) {
