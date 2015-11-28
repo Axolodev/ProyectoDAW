@@ -6,15 +6,21 @@
 package entrevistas;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Adriana
+ * @author ProgAva
  */
 public class Controller extends HttpServlet {
 
@@ -26,22 +32,50 @@ public class Controller extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Controller</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Controller at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            throws ServletException, IOException, SQLException {
+        
+        String op = request.getParameter("operacion");
+        HttpSession session = request.getSession();
+        String url = "/login.jsp";        
+        if (op.equals("login")) {
+            String usuario = request.getParameter("email");
+            String pass = request.getParameter("password");
+            if(usuario != null && pass != null){
+                boolean b = DBHandler.getUser(usuario, pass);
+                if (b) {
+                    url = "/home.jsp";
+                    session.setAttribute("user", usuario);
+                }
+            }
+        } else if(session.getAttribute("user") != null){
+            if (op.equals("compose")) {
+                url = "/envio.jsp";
+            } else if (op.equals("read")) {
+                String para = (String) session.getAttribute("user");
+                ArrayList lista = DBHandler.getMessages(para);
+                if (lista.isEmpty()) {
+                    url = "/nomensajes.jsp";
+                } else {
+                    request.setAttribute("lista", lista);
+                    url = "/ver.jsp";
+                }
+            } else if (op.equals("enviar")) {
+                String de = (String) session.getAttribute("user");
+                String para = request.getParameter("para");
+                String contenido = request.getParameter("contenido");
+                Mensaje m = new Mensaje(de, para, contenido);
+                DBHandler.storeMessage(m);
+                url = "/inicio.jsp";
+            }else if (op.equals("logout")) {
+                session.setAttribute("user", null);
+            }
         }
+        ServletContext sc = this.getServletContext();
+        RequestDispatcher rd = sc.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +90,11 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -70,7 +108,11 @@ public class Controller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

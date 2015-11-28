@@ -543,4 +543,28 @@ public class DBHandler {
         }
     }
     //</editor-fold>
+    
+    public static boolean getUser(String user, String pass) {
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            Statement statement = con.createStatement();
+            ResultSet results = statement.executeQuery("SELECT * FROM usuario "
+                    + "WHERE email = '" + user + "' AND password = '"+ pass + "'");
+            if(results.next()){
+                return true;
+            }
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
 }

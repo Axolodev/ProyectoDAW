@@ -10,34 +10,49 @@ package entrevistas;
  * @author Adriana
  */
 public class Usuario {
-    private String username;
-    private String password;
-    
-    public Usuario()
-    {
-        username = "";
-        password = "";
+   private int idUsuario;
+   private String nombreUsuario;
+   private String emailUsuario;
+   private String password;
+
+    public Usuario(int idUsuario, String nombreUsuario, String emailUsuario, String password) {
+        this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.emailUsuario = emailUsuario;
+        this.password = password;
     }
-    public Usuario(String u, String p)
-    {
-        username = u;
-        password = p;
+
+    public int getIdUsuario() {
+        return idUsuario;
     }
-    public void setUsername(String u)
-    {
-        username = u;
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
-    public void setPassword(String p)
-    {
-        password = p;
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
-    public String getUsername()
-    {
-        return username;
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
-    public String getPassword()
-    {
+
+    public String getEmailUsuario() {
+        return emailUsuario;
+    }
+
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
+    }
+
+    public String getPassword() {
         return password;
     }
-    
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+   
+   
 }
