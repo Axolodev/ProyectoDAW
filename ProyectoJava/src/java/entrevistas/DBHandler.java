@@ -79,7 +79,7 @@ public class DBHandler {
      *
      * @param cand
      */
-    public static void nuevoCandidato(Candidato cand) {
+    public static boolean nuevoCandidato(Candidato cand) {
         if (con == null) {
             try {
                 createConnection();
@@ -106,11 +106,13 @@ public class DBHandler {
             sql += "puestoAnterior=" + cand.getPuestoAnterior() + ",";
             sql += "expectativaSalario=" + cand.getExpectativaSalario() + ")";
             st.executeUpdate(sql);
-            st.close();
+            st.close();          
 
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+         return true;
     }
 
     /**
@@ -165,7 +167,7 @@ public class DBHandler {
             int idCandidato = results.getInt(1);
             String nombre = results.getString(2);
             String email = results.getString(3);
-            int telefono = results.getInt(4);
+            String telefono = results.getString(4);
             String direccion = results.getString(5);
             String puesto = results.getString(6);
             String estudios = results.getString(7);

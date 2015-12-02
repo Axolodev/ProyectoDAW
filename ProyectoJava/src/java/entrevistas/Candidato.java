@@ -13,7 +13,7 @@ public class Candidato {
     private int idCandidato;
     private String nombreCandidato;
     private String emailCandidato;
-    private int telefono;
+    private String telefono;
     private String direccion;
     private String puesto;
     private String estudios;
@@ -24,7 +24,7 @@ public class Candidato {
     private String puestoAnterior;
     private int expectativaSalario;
 
-    public Candidato(int idCandidato, String nombreCandidato, String emailCandidato, int telefono, String direccion, String puesto, String estudios, String universidad, String titulo, String certificados, int timeExpereince, String puestoAnterior, int expectativaSalario) {
+    public Candidato(int idCandidato, String nombreCandidato, String emailCandidato, String telefono, String direccion, String puesto, String estudios, String universidad, String titulo, String certificados, int timeExpereince, String puestoAnterior, int expectativaSalario) {
         this.idCandidato = idCandidato;
         this.nombreCandidato = nombreCandidato;
         this.emailCandidato = emailCandidato;
@@ -40,7 +40,7 @@ public class Candidato {
         this.expectativaSalario = expectativaSalario;
     }
 
-    public Candidato(String nombreCandidato, String emailCandidato, int telefono, String direccion, String puesto, String estudios, String universidad, String titulo, String certificados, int timeExpereince, String puestoAnterior, int expectativaSalario) {
+    public Candidato(String nombreCandidato, String emailCandidato, String telefono, String direccion, String puesto, String estudios, String universidad, String titulo, String certificados, int timeExpereince, String puestoAnterior, int expectativaSalario) {
         this.nombreCandidato = nombreCandidato;
         this.emailCandidato = emailCandidato;
         this.telefono = telefono;
@@ -83,11 +83,11 @@ public class Candidato {
         this.emailCandidato = emailCandidato;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

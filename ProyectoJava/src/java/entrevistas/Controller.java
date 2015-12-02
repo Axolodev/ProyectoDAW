@@ -39,12 +39,10 @@ public class Controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      * @throws java.sql.SQLException
      */
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ParseException {
-        
-        DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);   
+
+        DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
 
         // Hacer login. Done.
         String op = request.getParameter("operacion");
@@ -74,19 +72,19 @@ public class Controller extends HttpServlet {
                 String cert = request.getParameter("certificados");
                 String empresa = request.getParameter("empresa");
                 String necEconom = request.getParameter("economico");
-                
+
                 // TODO: meter toda la info, creo que falta. 
                 // Creo que tambien falta en el editaCandidato.jsp
                 // no se como lo vayamos a manejar yet
                 Candidato c = new Candidato();
-                
+
                 DBHandler.editaCandidato(c);
-                
+
                 url = "/Home.jsp";
             } else if (op.equals("editaEmpleado")) {
-                
+
                 int idEmpleado = Integer.valueOf(request.getParameter("idEmpleado"));
-                int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));                     
+                int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
                 String nombre = (String) session.getAttribute("nombre");
                 String correo = request.getParameter("correo");
                 int telefono = Integer.valueOf(request.getParameter("telefono"));
@@ -99,17 +97,14 @@ public class Controller extends HttpServlet {
                 double salario = Integer.valueOf(request.getParameter("salario"));
                 int diasVacaciones = Integer.valueOf(request.getParameter("diasVacaciones"));
 
-                
                 // TODO: meter toda la info, creo que falta
-                Empleado e = new Empleado(idEmpleado,idCandidato,nombre,correo,telefono,dir,puesto,titulo,universidad,estudios,cert,salario,diasVacaciones);
-                        
-                
+                Empleado e = new Empleado(idEmpleado, idCandidato, nombre, correo, telefono, dir, puesto, titulo, universidad, estudios, cert, salario, diasVacaciones);
+
                 DBHandler.editaEmpleado(e);
-                
-                
+
                 url = "/Home.jsp";
             } else if (op.equals("nuevaEntrevista")) {
-                
+
                 String nombre = (String) session.getAttribute("nombre");
                 int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
                 int idEntrevistador = Integer.valueOf(request.getParameter("idEntrevistador"));
@@ -117,14 +112,16 @@ public class Controller extends HttpServlet {
                 String plataforma = request.getParameter("plataforma");
                 String feedback = request.getParameter("feedback");
                 Date date = format.parse(fecha);
-                Entrevista e = new Entrevista(idCandidato,idEntrevistador, date, plataforma, feedback);
-                DBHandler.nuevaEntrevista(e); 
+                Entrevista e = new Entrevista(idCandidato, idEntrevistador, date, plataforma, feedback);
+                DBHandler.nuevaEntrevista(e);
                 url = "/Home.jsp";
-                
-            } else if (op.equals("nuevoCandidato")) {
-                
+
+            } 
+            
+            else if (op.equals("nuevoCandidato")) {
                 String nombre = (String) session.getAttribute("nombre");
-                int telefono = Integer.valueOf(request.getParameter("telefono"));
+                String nombreC = request.getParameter("nombre");
+                String telefono = request.getParameter("telefono");
                 String correo = request.getParameter("email");
                 String dir = request.getParameter("direccion");
                 String puesto = request.getParameter("puestoAct");
@@ -132,19 +129,23 @@ public class Controller extends HttpServlet {
                 String titulo = request.getParameter("titulo");
                 String uni = request.getParameter("universidad");
                 String cert = request.getParameter("cert");
-                int exp = Integer.valueOf(request.getParameter("experiencia"));
+                int exp = Integer.parseInt(request.getParameter("experiencia"));
                 String trabAnt = request.getParameter("trabajoAnt");
-                int salario = Integer.valueOf(request.getParameter("salario"));
-               
-                Candidato c = new Candidato(nombre,correo,telefono,dir,puesto,estudios,uni,titulo,cert,exp,trabAnt, salario);
-                DBHandler.nuevoCandidato(c);  
+                int salario = Integer.parseInt(request.getParameter("salario"));
+                Candidato c = new Candidato(nombreC, correo, telefono, dir, puesto, estudios, uni, titulo, cert, exp, trabAnt, salario);
+                boolean inserta = DBHandler.nuevoCandidato(c);
+                if(inserta){
                 url = "/Home.jsp";
-            }  else if (op.equals("nuevoEmpleado")) {
-                int idCand = (int)session.getAttribute("id");
+                }
+                else{
+                    url = "/nuevoCandidato.jsp";
+                }
+            } else if (op.equals("nuevoEmpleado")) {
+                int idCand = (int) session.getAttribute("id");
                 int salario = Integer.valueOf(request.getParameter("salario"));
                 int vacaciones = Integer.valueOf(request.getParameter("vacaciones"));
-            
-                Empleado e = new Empleado(idCand,salario,vacaciones);
+
+                Empleado e = new Empleado(idCand, salario, vacaciones);
                 DBHandler.nuevoEmpleado(e);
                 url = "/Home.jsp";
             } else if (op.equals("logout")) {
@@ -189,7 +190,7 @@ public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request,response);
+            processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
