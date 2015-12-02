@@ -28,7 +28,7 @@ public class DBHandler {
 
     private static void createConnection() throws SQLException {
         try {
-            String url = "jdbc:mysql://localhost/JavaDB";
+            String url = "jdbc:mysql://localhost:3306/javadb";
             con = DriverManager.getConnection(url, "root", "");
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
