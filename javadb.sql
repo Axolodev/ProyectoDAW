@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.0.2
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 02-12-2015 a las 08:06:38
--- Versión del servidor: 10.1.8-MariaDB
--- Versión de PHP: 5.6.14
+-- Host: 127.0.0.1
+-- Generation Time: Dec 02, 2015 at 08:26 PM
+-- Server version: 10.0.17-MariaDB
+-- PHP Version: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `javadb`
+-- Database: `javadb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `candidato`
+-- Table structure for table `candidato`
 --
 
 CREATE TABLE `candidato` (
@@ -42,10 +42,19 @@ CREATE TABLE `candidato` (
   `expectativaSalario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `candidato`
+--
+
+INSERT INTO `candidato` (`id`, `nombre`, `email`, `telefono`, `direccion`, `puesto`, `estudios`, `universidad`, `titulo`, `certificados`, `experiencia`, `puestoAnterior`, `expectativaSalario`) VALUES
+(1, 'Roberto Ruiz', 'rroberto.rruiz@gmail.com', 123213, 'sCerro de las mitras 235\r\nLas puentes 1er sector', 'sdafsaf', 'f', 'f', 'dffd', 'ff', 123, 'fdsafsa', 111),
+(2, 'Roberto Ruiz', 'rroberto.rruiz@gmail.com', 123213, 'sCerro de las mitras 235\r\nLas puentes 1er sector', 'sdafsaf', 'f', 'f', 'dffd', 'ff', 123, 'fdsafsa', 111),
+(3, 'Roberto Ruiz', 'rroberto.rruiz@gmail.com', 123, 'Cerro de las mitras 235\r\nLas puentes 1er sector', 'dsafasd', 'fdsaf', 'fd', 'fd', 'f', 32, 'ff', 2323);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empleado`
+-- Table structure for table `empleado`
 --
 
 CREATE TABLE `empleado` (
@@ -58,7 +67,7 @@ CREATE TABLE `empleado` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `entrevista`
+-- Table structure for table `entrevista`
 --
 
 CREATE TABLE `entrevista` (
@@ -73,7 +82,7 @@ CREATE TABLE `entrevista` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Table structure for table `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -84,55 +93,82 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `email`, `password`) VALUES
 (1, 'Roberto Ruiz', 'rroberto.rruiz@gmail.com', 'passdeprueba');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `candidato`
+-- Indexes for table `candidato`
 --
 ALTER TABLE `candidato`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `empleado`
+-- Indexes for table `empleado`
 --
 ALTER TABLE `empleado`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idCandidato` (`idCandidato`);
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `empleado_ibfk_1` (`idCandidato`);
 
 --
--- Indices de la tabla `entrevista`
+-- Indexes for table `entrevista`
 --
 ALTER TABLE `entrevista`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
   ADD KEY `idCandidato` (`idCandidato`),
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
--- Indices de la tabla `usuario`
+-- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Filtros para la tabla `empleado`
+-- AUTO_INCREMENT for table `candidato`
+--
+ALTER TABLE `candidato`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `empleado`
+--
+ALTER TABLE `empleado`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `entrevista`
+--
+ALTER TABLE `entrevista`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `empleado`
 --
 ALTER TABLE `empleado`
   ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`id`);
 
 --
--- Filtros para la tabla `entrevista`
+-- Constraints for table `entrevista`
 --
 ALTER TABLE `entrevista`
   ADD CONSTRAINT `entrevista_ibfk_1` FOREIGN KEY (`idCandidato`) REFERENCES `candidato` (`id`),

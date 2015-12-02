@@ -5,18 +5,14 @@
  */
 package entrevistas;
 
-import entrevistas.Candidato;
-import entrevistas.Empleado;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.eclipse.jdt.internal.compiler.lookup.TypeConstants;
 
 /**
  *
@@ -39,6 +35,8 @@ public class DBHandler {
     /**
      * editaCanadiato(Candidato cand) Funcion que realiza un update a la tabla
      * candidatos recibe de paramtero un candidato que se recibe de la interfaz
+     * 
+     * @param cand
      */
     public static void editaCandidato(Candidato cand) {
         if (con == null) {
@@ -78,6 +76,7 @@ public class DBHandler {
      * tabla candidato
      *
      * @param cand
+     * @return 
      */
     public static boolean nuevoCandidato(Candidato cand) {
         boolean work = false;
@@ -89,25 +88,26 @@ public class DBHandler {
             }
         }
         try {
-            Statement st = con.createStatement();
-            String sql;
-            int id = getMaxIdCandidato();
-            sql = "insert into candidato values(";
-            sql += id + ",";
-            sql += " " + cand.getNombreCandidato() + ",";
-            sql += " " + cand.getEmailCandidato() + ",";
-            sql += " " + cand.getTelefono() + ",";
-            sql += " " + cand.getDireccion() + ",";
-            sql += " " + cand.getPuesto() + ",";
-            sql += " " + cand.getEstudios() + ",";
-            sql += " " + cand.getUniversidad() + ",";
-            sql += " " + cand.getTitulo() + ",";
-            sql += " " + cand.getCertificados() + ",";
-            sql += " " + cand.getTimeExpereince() + ",";
-            sql += " " + cand.getPuestoAnterior() + ",";
-            sql += " " + cand.getExpectativaSalario() + ")";
-             work = st.execute(sql);
-            st.close();          
+            try (Statement st = con.createStatement()) {
+                String sql;
+                sql = "insert into candidato(nombre, email, telefono, direccion, "
+                        + "puesto, estudios, universidad, "
+                        + "titulo, certificados, experiencia, "
+                        + "puestoAnterior, expectativaSalario)"  + " values(";
+                sql += " '" + cand.getNombreCandidato() + "',";
+                sql += " '" + cand.getEmailCandidato() + "',";
+                sql += " '" + cand.getTelefono() + "',";
+                sql += " '" + cand.getDireccion() + "',";
+                sql += " '" + cand.getPuesto() + "',";
+                sql += " '" + cand.getEstudios() + "',";
+                sql += " '" + cand.getUniversidad() + "',";
+                sql += " '" + cand.getTitulo() + "',";
+                sql += " '" + cand.getCertificados() + "',";
+                sql += " '" + cand.getTimeExpereince() + "',";
+                sql += " '" + cand.getPuestoAnterior() + "',";
+                sql += " '" + cand.getExpectativaSalario() + "')";
+                work = st.execute(sql);
+            }          
 
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
