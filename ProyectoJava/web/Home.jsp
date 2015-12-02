@@ -21,7 +21,7 @@
             <h2 id="Fecha"></h2>
         </div>
 
-        <a href="Controlador?operacion=editaCandidato">
+    <!--    <a href="Controlador?operacion=editaCandidato">
             editar candidato
         </a><br/><br/>
         <a href="Controlador?operacion=editaEmpleado">
@@ -39,7 +39,7 @@
 
         <a href="Controlador?operacion=logout">
             logout
-        </a>
+        </a> -->
     </body>
 
     <script>

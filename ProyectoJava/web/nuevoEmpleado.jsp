@@ -10,9 +10,9 @@
 <html>
 
     <%
-       /* if (session.getAttribute("user") == null) {
+       if (session.getAttribute("user") == null) {
             response.sendRedirect("/Mensajeria/login.jsp");
-        }*/
+        }
     %>
 
     <form name="nuevoEmpleado" action="" method="get">

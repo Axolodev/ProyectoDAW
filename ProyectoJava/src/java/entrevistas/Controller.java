@@ -124,18 +124,19 @@ public class Controller extends HttpServlet {
             } else if (op.equals("nuevoCandidato")) {
                 
                 String nombre = (String) session.getAttribute("nombre");
-                String telefono = request.getParameter("telefono");
-                String correo = request.getParameter("correo");
+                int telefono = Integer.valueOf(request.getParameter("telefono"));
+                String correo = request.getParameter("email");
                 String dir = request.getParameter("direccion");
-                String puesto = request.getParameter("puesto");
-                String carrera = request.getParameter("carrera");
+                String puesto = request.getParameter("puestoAct");
+                String estudios = request.getParameter("estudios");
+                String titulo = request.getParameter("titulo");
                 String uni = request.getParameter("universidad");
                 String cert = request.getParameter("cert");
-                String trabAnt = request.getParameter("trabAnt");
-                String empresa = request.getParameter("empresa");
-                String salario = request.getParameter("salario");
+                int exp = Integer.valueOf(request.getParameter("experiencia"));
+                String trabAnt = request.getParameter("trabajoAnt");
+                int salario = Integer.valueOf(request.getParameter("salario"));
                
-                Candidato c = new Candidato();
+                Candidato c = new Candidato(nombre,correo,telefono,dir,puesto,estudios,uni,titulo,cert,exp,trabAnt, salario);
                 DBHandler.nuevoCandidato(c);  
                 url = "/Home.jsp";
             }  else if (op.equals("nuevoEmpleado")) {
@@ -188,7 +189,7 @@ public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            processRequest(request,response);
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {

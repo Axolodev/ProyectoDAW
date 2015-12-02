@@ -40,6 +40,21 @@ public class Candidato {
         this.expectativaSalario = expectativaSalario;
     }
 
+    public Candidato(String nombreCandidato, String emailCandidato, int telefono, String direccion, String puesto, String estudios, String universidad, String titulo, String certificados, int timeExpereince, String puestoAnterior, int expectativaSalario) {
+        this.nombreCandidato = nombreCandidato;
+        this.emailCandidato = emailCandidato;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.puesto = puesto;
+        this.estudios = estudios;
+        this.universidad = universidad;
+        this.titulo = titulo;
+        this.certificados = certificados;
+        this.timeExpereince = timeExpereince;
+        this.puestoAnterior = puestoAnterior;
+        this.expectativaSalario = expectativaSalario;
+    }
+
     public Candidato() {
     }
     
