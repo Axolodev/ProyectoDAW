@@ -17,7 +17,7 @@
         </div>
         <br/><br/><br/><br/><br/>
         <br/><br/><br/><br/><br/>
-        <form name="login" action="Home.jsp" method="get">
+        <form name="login" action="Controller" method="post">
             <div class="move" style="Width: 70%">
                 <h1>Inicia Sesión</h1>
                 <table>
@@ -39,6 +39,7 @@
                     </tr>
                     <tr>
                         <td>
+                            <input type="hidden" name="operacion" value="login"/>
                             &nbsp;
                         </td>
                     </tr>

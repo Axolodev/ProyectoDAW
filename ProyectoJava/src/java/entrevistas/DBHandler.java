@@ -383,7 +383,6 @@ public class DBHandler {
     }
 
     //</editor-fold>
-    
     //<editor-fold desc="Entrevistas">
     /**
      * editaCanadiato(Candidato cand) Funcion que realiza un update a la tabla
@@ -403,7 +402,7 @@ public class DBHandler {
             String sql;
             sql = "update candidato set "; // Where id is x ?
             sql += "idCandidato=" + ent.getIdCandidato() + ",";
-            sql += "idUsuario=" + ent.getIdUsuario()+ ",";
+            sql += "idUsuario=" + ent.getIdUsuario() + ",";
             sql += "plataforma=" + ent.getPlataforma() + ",";
             sql += "fecha=" + ent.getFecha() + ",";
             sql += "feedback=" + ent.getFeedback() + ",";
@@ -507,9 +506,8 @@ public class DBHandler {
             String plataforma = results.getString(6);
             String feedback = results.getString(7);
             int idEntrevista = results.getInt(8);
-            
-            ent = new Entrevista(idEntrevista,idCand,idEnt,nombreCand,nombreEnt,fecha,plataforma,feedback);
-          
+
+            ent = new Entrevista(idEntrevista, idCand, idEnt, nombreCand, nombreEnt, fecha, plataforma, feedback);
 
             st.close();
         } catch (SQLException ex) {
@@ -543,7 +541,7 @@ public class DBHandler {
         }
     }
     //</editor-fold>
-    
+
     public static boolean getUser(String user, String pass) {
         if (con == null) {
             try {
@@ -555,16 +553,15 @@ public class DBHandler {
         try {
             Statement statement = con.createStatement();
             ResultSet results = statement.executeQuery("SELECT * FROM usuario "
-                    + "WHERE email = '" + user + "' AND password = '"+ pass + "'");
-            if(results.next()){
+                    + "WHERE email = '" + user + "' AND password = '" + pass + "'");
+            if (results.next()) {
                 return true;
             }
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return false;
     }
 }
