@@ -80,6 +80,7 @@ public class DBHandler {
      * @param cand
      */
     public static boolean nuevoCandidato(Candidato cand) {
+        boolean work = false;
         if (con == null) {
             try {
                 createConnection();
@@ -92,27 +93,26 @@ public class DBHandler {
             String sql;
             int id = getMaxIdCandidato();
             sql = "insert into candidato values(";
-            sql += "id = " + id;
-            sql += "nombre=" + cand.getNombreCandidato() + ",";
-            sql += "email=" + cand.getEmailCandidato() + ",";
-            sql += "telefono=" + cand.getTelefono() + ",";
-            sql += "direccion=" + cand.getDireccion() + ",";
-            sql += "puesto=" + cand.getPuesto() + ",";
-            sql += "estudios=" + cand.getEstudios() + ",";
-            sql += "universidad=" + cand.getUniversidad() + ",";
-            sql += "titulo=" + cand.getTitulo() + ",";
-            sql += "certificados=" + cand.getCertificados() + ",";
-            sql += "experiencia=" + cand.getTimeExpereince() + ",";
-            sql += "puestoAnterior=" + cand.getPuestoAnterior() + ",";
-            sql += "expectativaSalario=" + cand.getExpectativaSalario() + ")";
-            st.executeUpdate(sql);
+            sql += id + ",";
+            sql += " " + cand.getNombreCandidato() + ",";
+            sql += " " + cand.getEmailCandidato() + ",";
+            sql += " " + cand.getTelefono() + ",";
+            sql += " " + cand.getDireccion() + ",";
+            sql += " " + cand.getPuesto() + ",";
+            sql += " " + cand.getEstudios() + ",";
+            sql += " " + cand.getUniversidad() + ",";
+            sql += " " + cand.getTitulo() + ",";
+            sql += " " + cand.getCertificados() + ",";
+            sql += " " + cand.getTimeExpereince() + ",";
+            sql += " " + cand.getPuestoAnterior() + ",";
+            sql += " " + cand.getExpectativaSalario() + ")";
+             work = st.execute(sql);
             st.close();          
 
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         }
-         return true;
+         return work;
     }
 
     /**
