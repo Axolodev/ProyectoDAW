@@ -85,17 +85,24 @@ public class Controller extends HttpServlet {
                 url = "/Home.jsp";
             } else if (op.equals("editaEmpleado")) {
                 
+                int idEmpleado = Integer.valueOf(request.getParameter("idEmpleado"));
+                int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));                     
                 String nombre = (String) session.getAttribute("nombre");
                 String correo = request.getParameter("correo");
-                String telefono = request.getParameter("telefono");
+                int telefono = Integer.valueOf(request.getParameter("telefono"));
                 String dir = request.getParameter("direccion");
-                String carrera = request.getParameter("carrera");
+                String puesto = request.getParameter("puesto");
+                String estudios = request.getParameter("estudios");
+                String universidad = request.getParameter("universidad");
+                String titulo = request.getParameter("titulo");
                 String cert = request.getParameter("certificados");
-                String empresa = request.getParameter("empresa");
-                String necEconom = request.getParameter("economico");
+                double salario = Integer.valueOf(request.getParameter("salario"));
+                int diasVacaciones = Integer.valueOf(request.getParameter("diasVacaciones"));
+
                 
                 // TODO: meter toda la info, creo que falta
-                Empleado e = new Empleado();
+                Empleado e = new Empleado(idEmpleado,idCandidato,nombre,correo,telefono,dir,puesto,titulo,universidad,estudios,cert,salario,diasVacaciones);
+                        
                 
                 DBHandler.editaEmpleado(e);
                 
@@ -104,16 +111,16 @@ public class Controller extends HttpServlet {
             } else if (op.equals("nuevaEntrevista")) {
                 
                 String nombre = (String) session.getAttribute("nombre");
-                String entrevistador = request.getParameter("entrevistador");
-                String puesto = request.getParameter("puesto");
+                int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
+                int idEntrevistador = Integer.valueOf(request.getParameter("idEntrevistador"));
                 String fecha = request.getParameter("fecha");
                 String plataforma = request.getParameter("plataforma");
                 String feedback = request.getParameter("feedback");
                 Date date = format.parse(fecha);
-                // Modificar id -> le puse 2 
-                Entrevista e = new Entrevista(2, nombre, entrevistador, date, plataforma, feedback);
-                DBHandler.nuevaEntrevista(e);  // Idk what is happening
+                Entrevista e = new Entrevista(idCandidato,idEntrevistador, date, plataforma, feedback);
+                DBHandler.nuevaEntrevista(e); 
                 url = "/Home.jsp";
+                
             } else if (op.equals("nuevoCandidato")) {
                 
                 String nombre = (String) session.getAttribute("nombre");
@@ -127,24 +134,16 @@ public class Controller extends HttpServlet {
                 String trabAnt = request.getParameter("trabAnt");
                 String empresa = request.getParameter("empresa");
                 String salario = request.getParameter("salario");
-                
-                /* en el jsp viene puesto dos veces, 
-                se supone que solo iria una vez */
-                
-                
+               
                 Candidato c = new Candidato();
                 DBHandler.nuevoCandidato(c);  
                 url = "/Home.jsp";
             }  else if (op.equals("nuevoEmpleado")) {
-                
-                // Do we really need this? -> id
-                String idCand = (String) session.getAttribute("id");
-                String nombre = (String) session.getAttribute("nombre");
-                String puesto = request.getParameter("puesto");
-                String salario = request.getParameter("salario");
-                String vacaciones = request.getParameter("vacaciones");
+                int idCand = (int)session.getAttribute("id");
+                int salario = Integer.valueOf(request.getParameter("salario"));
+                int vacaciones = Integer.valueOf(request.getParameter("vacaciones"));
             
-                Empleado e = new Empleado();
+                Empleado e = new Empleado(idCand,salario,vacaciones);
                 DBHandler.nuevoEmpleado(e);
                 url = "/Home.jsp";
             } else if (op.equals("logout")) {
@@ -171,7 +170,9 @@ public class Controller extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -189,7 +190,9 @@ public class Controller extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

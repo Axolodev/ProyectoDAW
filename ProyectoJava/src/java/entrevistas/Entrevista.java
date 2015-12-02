@@ -30,6 +30,14 @@ public class Entrevista {
         this.plataforma = plataforma;
         this.feedback = feedback;
     }
+
+    public Entrevista(int idCandidato, int idUsuario, Date fecha, String plataforma, String feedback) {
+        this.idCandidato = idCandidato;
+        this.idUsuario = idUsuario;
+        this.fecha = fecha;
+        this.plataforma = plataforma;
+        this.feedback = feedback;
+    }
     
     public Entrevista(int idEntrevista, int idCandidato, int idUsuario, String nombreCandidato, String nombreEntrevistador, Date fecha, String plataforma, String feedback) {
         this.idEntrevista = idEntrevista;

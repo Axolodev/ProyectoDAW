@@ -99,8 +99,6 @@
                 width:100%;
             }
         </style>
-
-
         <script>
             // Aqui se obtienen los datos.
             // Generados manualmente para pruebas
@@ -255,32 +253,29 @@
             <form id="informacion_empleado">
 
                 <div id="informacion_personal">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" name="nombre">
+                    <input class="form-control" type="hidden" name="idEmpleado"/>
+                    <input class="form-control" type="hidden" name="idCandidato"/>
+                    <input class="form-control" type="text" name="nombre" placeholder="Nombre">
                     <br/>
-                    <label for="correo">Email:</label>
-                    <input type="email" name="correo">
+                    <input class="form-control" type="email" name="correo" placeholder="Email">
                     <br/>
-                    <label for="telefono">Telefono:</label>
-                    <input type="text" name="telefono">
-                    <br />
-                    <label for="direccion">Direccion:</label>
-                    <br />
-                    <textarea name="direccion"></textarea>
+                    <input class="form-control" type="email" name="telefono" placeholder="Telefono">
+                    <textarea class="form-control" name="direccion"></textarea>
                 </div>
                 <div id="informacion_profesional">
-                    <label for="carrera">Carrera:</label>
-                    <input type="text" name="carrera">
+                    <input class="form-control" type="text" name="puesto" placeholder="puesto"/>
                     <br/>
-                    <label for="certificados">Certificados:</label>
-                    <input type="text" name="certificados">
+                    <input class="form-control" type="text" name="estudios" placeholder="estudios"/>
                     <br/>
-                    <label for="empresa">Empresa:</label>
-                    <input type="text" name="empresa">
-                    <br />
-                    <label for="economico">Necesidad economica:</label>
-                    <input type="text" name="economico">
-                    <br />
+                    <input class="form-control" type="text" name="universidad" placeholder="universidad"/>
+                    <br/>
+                    <input class="form-control" type="text" name="titulo" placeholder="titulo"/>                     
+                    <br/>
+                    <input class="form-control" type="text" name="cert" placeholder="Certificados"/>
+                    <br/>
+                    <input class="form-control" type="text" name="salario" placeholder="Salario"/>
+                    <br/>
+                    <input class="form-control" type="number" name="diasVacaciones" placeholder="Dias Vacaciones"/>
                 </div>
                 <span class="clear"></span>
 

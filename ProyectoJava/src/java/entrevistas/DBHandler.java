@@ -231,8 +231,8 @@ public class DBHandler {
             Statement st = con.createStatement();
             String sql;
             sql = "update candidato set ";
-            sql += "nombre=" + emp.getNombreCandidato() + ",";
-            sql += "email=" + emp.getEmailCandidato() + ",";
+            sql += "nombre=" + emp.getNombre() + ",";
+            sql += "email=" + emp.getCorreo() + ",";
             sql += "telefono=" + emp.getTelefono() + ",";
             sql += "direccion=" + emp.getDireccion() + ",";
             sql += "puesto=" + emp.getPuesto() + ",";
@@ -240,9 +240,6 @@ public class DBHandler {
             sql += "universidad=" + emp.getUniversidad() + ",";
             sql += "titulo=" + emp.getTitulo() + ",";
             sql += "certificados=" + emp.getCertificados() + ",";
-            sql += "experiencia=" + emp.getTimeExpereince() + ",";
-            sql += "puestoAnterior=" + emp.getPuestoAnterior() + ",";
-            sql += "expectativaSalario=" + emp.getExpectativaSalario() + ",";
             sql += "where id = " + emp.getIdCandidato();
             st.executeUpdate(sql);
             st.close();
@@ -344,8 +341,8 @@ public class DBHandler {
             int salario = results.getInt(9);
             int diasVacaciones = results.getInt(10);
 
-            emp.setNombreCandidato(nombre);
-            emp.setEmailCandidato(email);
+            emp.setNombre(nombre);
+            emp.setCorreo(email);
             emp.setTelefono(telefono);
             emp.setDireccion(direccion);
             emp.setTitulo(titulo);
