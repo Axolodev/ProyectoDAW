@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -394,14 +395,16 @@ public class DBHandler {
             }
         }
         try {
-            Statement st = con.createStatement();
+            Statement st = con.createStatement();   
+            Timestamp ts = new Timestamp(ent.getFecha().getTime());
             String sql;
-            sql = "insert into entrevista(idCandidato,idEmpleado,fecha,plataforma,feedback) values(";
-            sql += ent.getIdCandidato() + ",";
-            sql += ent.getIdUsuario() + ",";
-            sql += ent.getFecha() + ",";
-            sql += "'" + ent.getPlataforma() + "',";
+            sql = "insert into entrevista(idCandidato,idUsuario,fecha,plataforma,feedback) values('";
+            sql += ent.getIdCandidato() + "' , '";
+            sql += ent.getIdUsuario() + "', '";
+            sql += ts + "', '";
+            sql += "" + ent.getPlataforma() + "',";
             sql += "'" + ent.getFeedback() + "')";
+            System.out.println(sql);
             st.executeUpdate(sql);
             st.close();
 

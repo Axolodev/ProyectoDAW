@@ -4,7 +4,6 @@
     Author     : Adriana, Mayra y Roberto
 --%>
 <%
-    System.out.println(session.getAttribute("user"));
     if (session.getAttribute("user") == null) {
         String redirectURL = "Login.jsp";
         response.sendRedirect(redirectURL);

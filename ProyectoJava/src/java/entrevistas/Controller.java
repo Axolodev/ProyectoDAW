@@ -41,7 +41,7 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ParseException {
 
-        DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-17", Locale.ENGLISH);
 
         // Hacer login. Done.
         String op = request.getParameter("operacion");
@@ -106,9 +106,10 @@ public class Controller extends HttpServlet {
             } else if (op.equals("nuevaEntrevista")) {
                 int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
                 int idEntrevistador = Integer.valueOf(request.getParameter("idEntrevistador"));
-                String fecha = request.getParameter("fecha");
+                String fecha = request.getParameter("fechaEntrevista");
                 String plataforma = request.getParameter("plataforma");
                 String feedback = request.getParameter("feedback");
+                System.out.println(fecha);
                 Date date = format.parse(fecha);
                 Entrevista e = new Entrevista(idCandidato, idEntrevistador, date, plataforma, feedback);
                 DBHandler.nuevaEntrevista(e);

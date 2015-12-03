@@ -8,7 +8,7 @@
 <%@include file="header.jsp"%>
 
 <html>
-    <form name="nuevaEntrevista" action="Controller?operacion=nuevaEntrevista" method="get">
+    <form name="nuevaEntrevista" action="Controller?operacion=nuevaEntrevista" method="post">
         <div>
             <h1>PROGRAMAR ENTREVISTA</h1>
             <fieldset>
@@ -16,7 +16,7 @@
                 <div class="inputs">
                     <input class="form-control" type="text" name="idCandidato" placeholder="ID Candidato"/>
                     <br/>
-                    <input class="form-control" type="text" name="idUsuario" placeholder="ID Entrevistador"/>
+                    <input class="form-control" type="text" name="idEntrevistador" placeholder="ID Entrevistador"/>
                     <br/>
                     <input class="form-control" type="date" name="fechaEntrevista" placeholder=" Fecha Entrevista"/>
                     <br/>
