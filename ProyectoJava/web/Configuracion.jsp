@@ -18,50 +18,14 @@
     <form name="nuevoCandidato" action="servidor.html" method="get">
         <div>
             <h1>MODIFICAR DATOS </h1>
-            <table style="margin-left:15%">
-                <tr>
-                    <td>
-                        Nombre:
-                    </td>
-                    <td>
-                        <input type="text" name="nombre"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Correo electrónico:
-                    </td>
-                    <td>
-                        <input type="email" name="correo" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Contraseña Actual:
-                    </td>
-                    <td>
-                        <input type="text" name="passActual" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Contraseña nueva:
-                    </td>
-                    <td>
-                        <input type="password" name="passNueva" />
-                    </td>
-                </tr> 
-                <tr>
-                    <td>&nbsp;
-                    </td>
-                </tr>  
-                <tr>
-                    <td> <input type="submit" name="enviar" id="envia" value="Guardar"/></td>
-                </tr>        
-            </table>
-            <br/><br/>
-            <br/>
-            <br/>
+            <div class="inputs">
+                    <input class="form-control" type="text" name="email" placeholder="correo"/>
+                    <br/>
+                    <input class="form-control" type="text" name="password" placeholder="Nuevo Password"/>
+                    <br/>
+                    <input class="btn btn-default" type="submit" name="enviar" id="envia" value="Guardar"/>
+                    <br/> 
+                </div>
             <br/>
         </div>
     </form>
