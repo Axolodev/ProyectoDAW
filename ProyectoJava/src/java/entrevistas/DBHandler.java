@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -545,6 +546,47 @@ public class DBHandler {
 
         return false;
     }
+    
+    public static ArrayList dameCandidatos(){
+        
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            try (Statement statement = con.createStatement()) {
+                ArrayList<Candidato> lista;
+                lista = new ArrayList<>();
+                ResultSet results = statement.executeQuery("Select * from candidato");
+                while (results.next()) {
+                    Candidato can = new Candidato(results.getInt("id"), 
+                            results.getString("nombre"),
+                            results.getString("email"), 
+                            results.getString("telefono"), 
+                            results.getString("direccion"), 
+                            results.getString("puesto"), 
+                            results.getString("estudios"), 
+                            results.getString("universidad"), 
+                            results.getString("titulo"), 
+                            results.getString("certificados"), 
+                            results.getInt("experiencia"), 
+                            results.getString("puestoAnterior"), 
+                            results.getInt("expectativaSalario"));
+                    lista.add(can);
+                }
+                return lista;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
     /**
      * actualiza password de usuario
      * @param email

@@ -34,7 +34,7 @@
             Candidatos
             <ul>
                 <li><a href="nuevoCandidato.jsp">Agregar Nuevo</a></li>
-                <li><a href="editaCandidato.jsp">Modificar/Eliminar</a></li>
+                <li><a href="Controller?operacion=dameCandidatos">Modificar/Eliminar</a></li>
             </ul>
           </li>
           <li>Entrevista

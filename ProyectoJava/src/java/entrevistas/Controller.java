@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -80,8 +81,7 @@ public class Controller extends HttpServlet {
                 DBHandler.editaCandidato(c);
 
                 url = "/Home.jsp";
-            } 
-            else if (op.equals("editaEmpleado")) {
+            } else if (op.equals("editaEmpleado")) {
 
                 int idEmpleado = Integer.valueOf(request.getParameter("idEmpleado"));
                 int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
@@ -115,10 +115,8 @@ public class Controller extends HttpServlet {
                 DBHandler.nuevaEntrevista(e);
                 url = "/Home.jsp";
 
-            } 
-            
-            else if (op.equals("nuevoCandidato")) {
-                
+            } else if (op.equals("nuevoCandidato")) {
+
                 String nombreC = request.getParameter("nombre");
                 String telefono = request.getParameter("telefono");
                 String correo = request.getParameter("email");
@@ -145,11 +143,15 @@ public class Controller extends HttpServlet {
             } else if (op.equals("logout")) {
                 session.setAttribute("user", null);
                 url = "/Login.jsp";
-            } else if (op.equals("configuracion")){
+            } else if (op.equals("configuracion")) {
                 String email = request.getParameter("email");
                 String password = request.getParameter("password");
                 DBHandler.changePassword(email, password);
                 url = "/Home.jsp";
+            } else if (op.equals("dameCandidatos")) {
+                ArrayList<Candidato> al = DBHandler.dameCandidatos();
+                request.setAttribute("lista", al);
+                url = "/editaCandidato.jsp";
             }
         }
         ServletContext sc = this.getServletContext();
