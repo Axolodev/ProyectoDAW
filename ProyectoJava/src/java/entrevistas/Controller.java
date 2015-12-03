@@ -80,7 +80,8 @@ public class Controller extends HttpServlet {
                 DBHandler.editaCandidato(c);
 
                 url = "/Home.jsp";
-            } else if (op.equals("editaEmpleado")) {
+            } 
+            else if (op.equals("editaEmpleado")) {
 
                 int idEmpleado = Integer.valueOf(request.getParameter("idEmpleado"));
                 int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
@@ -132,13 +133,8 @@ public class Controller extends HttpServlet {
                 String trabAnt = request.getParameter("trabajoAnt");
                 int salario = Integer.parseInt(request.getParameter("salario"));
                 Candidato c = new Candidato(nombreC, correo, telefono, dir, puesto, estudios, uni, titulo, cert, exp, trabAnt, salario);
-                boolean inserta = DBHandler.nuevoCandidato(c);
-                if(inserta){
+                DBHandler.nuevoCandidato(c);
                 url = "/Home.jsp";
-                }
-                else{
-                    url = "/nuevoCandidato.jsp";
-                }
             } else if (op.equals("nuevoEmpleado")) {
                 int idCand = (int) session.getAttribute("id");
                 int salario = Integer.valueOf(request.getParameter("salario"));

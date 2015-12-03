@@ -13,7 +13,7 @@
          response.sendRedirect("/Mensajeria/login.jsp");
          } 
     %>
-    <form name="nuevaEntrevista" action="" method="get">
+    <form name="nuevaEntrevista" action="Controller?operacion=nuevsEntrevista" method="get">
         <div>
             <h1>PROGRAMAR ENTREVISTA</h1>
             <fieldset>

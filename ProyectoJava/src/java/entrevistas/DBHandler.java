@@ -50,7 +50,7 @@ public class DBHandler {
 
             Statement st = con.createStatement();
             String sql;
-            sql = "update candidato set "; // Where id is x ?
+            sql = "update candidato set "; 
             sql += "nombre=" + cand.getNombreCandidato() + ",";
             sql += "email=" + cand.getEmailCandidato() + ",";
             sql += "telefono=" + cand.getTelefono() + ",";
@@ -78,8 +78,7 @@ public class DBHandler {
      * @param cand
      * @return 
      */
-    public static boolean nuevoCandidato(Candidato cand) {
-        boolean work = false;
+    public static void nuevoCandidato(Candidato cand) {
         if (con == null) {
             try {
                 createConnection();
@@ -106,43 +105,13 @@ public class DBHandler {
                 sql += " '" + cand.getTimeExpereince() + "',";
                 sql += " '" + cand.getPuestoAnterior() + "',";
                 sql += " '" + cand.getExpectativaSalario() + "')";
-                work = st.execute(sql);
+                st.execute(sql);
             }          
 
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return work;
     }
-
-    /**
-     * getMaxIdCandidato() calcula el id máximo exixstente en la tabla le suma
-     * uno, y regresa el id que debe ser insertado
-     *
-     * @return int
-     */
-    public static int getMaxIdCandidato() {
-        if (con == null) {
-            try {
-                createConnection();
-            } catch (SQLException ex) {
-                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        int id = 0;
-        try {
-            Statement st = con.createStatement();
-            String sql;
-            sql = "Select count(*) from candidato";
-            ResultSet results = st.executeQuery(sql);
-            id = results.getInt(1) + 1;
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return id;
-    }
-
     /**
      * Dado un id, regresa el resto de los datos del candidato y los almacena en
      * una variable de tipo Candidato
@@ -216,6 +185,10 @@ public class DBHandler {
 //</editor-fold>
 
     //<editor-fold desc="Empleados">
+    /**
+     * manda llamar a las funciones actualizaTablaCandidato y actualizaTablaEmpleado
+     * @param emp  recibe un objeto empleado
+     */
     public static void editaEmpleado(Empleado emp) {
         if (con == null) {
             try {
@@ -227,7 +200,10 @@ public class DBHandler {
         actualizaTablaCandidato(emp);
         actualizaTablaEmpleado(emp);
     }
-
+    /**
+     * actualizaTablaCandidato actualiza los datos de un empleado que se encuentren en la tabvla de candidato dado un id de empleado
+     * @param emp 
+     */
     public static void actualizaTablaCandidato(Empleado emp) {
         try {
             Statement st = con.createStatement();
@@ -249,7 +225,10 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * actualiza los datos de un empleado dado un id de empleado
+     * @param emp 
+     */
     public static void actualizaTablaEmpleado(Empleado emp) {
         try {
             Statement st = con.createStatement();
@@ -265,7 +244,12 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * nuevoempleado(emp)
+     * agrega un nuevo empleado a la base de datos
+     * realiza un link con la tabla de candidatos para no tener datos duplicados
+     * @param emp 
+     */
     public static void nuevoEmpleado(Empleado emp) {
         if (con == null) {
             try {
@@ -277,13 +261,10 @@ public class DBHandler {
         try {
             Statement st = con.createStatement();
             String sql;
-            int id = getMaxIdEmpleado();
-            sql = "update empleado set ";
-            sql += "id=" + id + ",";
-            sql += "idCandidato = " + emp.getIdCandidato();
-            sql += "salario=" + emp.getSalario() + ",";
-            sql += "diasVacaciones=" + emp.getDiasVacaciones() + ",";
-            sql += "where id = " + emp.getIdEmpleado();
+            sql = "insert into empleado (idCandidato,salario,diasVacaciones) values(";
+            sql += emp.getIdCandidato() +",";
+            sql += emp.getSalario() + ",";
+            sql += emp.getDiasVacaciones() + ")";
             st.executeUpdate(sql);
             st.close();
 
@@ -291,29 +272,11 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public static int getMaxIdEmpleado() {
-        if (con == null) {
-            try {
-                createConnection();
-            } catch (SQLException ex) {
-                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        int id = 0;
-        try {
-            Statement st = con.createStatement();
-            String sql;
-            sql = "Select count(*) from empleado";
-            ResultSet results = st.executeQuery(sql);
-            id = results.getInt(1) + 1;
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return id;
-    }
-
+    /**
+     * despliega los datos de un empleado dado de parametro un id
+     * @param id
+     * @return 
+     */
     public static Empleado verEmpleado(int id) {
         if (con == null) {
             try {
@@ -360,7 +323,10 @@ public class DBHandler {
         }
         return emp;
     }
-
+    /**
+     * borra un empleado de la base de datos dado su id
+     * @param id 
+     */
     public static void borraEmpleado(int id) {
         if (con == null) {
             try {
@@ -382,9 +348,10 @@ public class DBHandler {
     }
 
     //</editor-fold>
+        
     //<editor-fold desc="Entrevistas">
     /**
-     * editaCanadiato(Candidato cand) Funcion que realiza un update a la tabla
+     * editaEntrevista(Entrevista ent) Funcion que realiza un update a la tabla
      * candidatos recibe de paramtero un candidato que se recibe de la interfaz
      */
     public static void editaEntrevista(Entrevista ent) {
@@ -399,7 +366,7 @@ public class DBHandler {
 
             Statement st = con.createStatement();
             String sql;
-            sql = "update candidato set "; // Where id is x ?
+            sql = "update entrevista set "; 
             sql += "idCandidato=" + ent.getIdCandidato() + ",";
             sql += "idUsuario=" + ent.getIdUsuario() + ",";
             sql += "plataforma=" + ent.getPlataforma() + ",";
@@ -412,9 +379,8 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     /**
-     * nuevoCandidato(Candidato cand) funcion que inserta un candidato a la
+     * nuevaEntrevista(Entrevista ent) funcion que inserta una entrevisat a la
      * tabla candidato
      *
      * @param cand
@@ -430,53 +396,22 @@ public class DBHandler {
         try {
             Statement st = con.createStatement();
             String sql;
-            int id = getMaxIdEntrevista();
-            sql = "insert into entrevista values(";
-            sql += "id = " + id;
-            sql += "idCandidato=" + ent.getIdCandidato() + ",";
-            sql += "idUsuario=" + ent.getIdUsuario() + ",";
-            sql += "fecha=" + ent.getFecha() + ",";
-            sql += "plataforma=" + ent.getPlataforma() + ",";
-            sql += "feedback=" + ent.getFeedback();
+            sql = "insert into entrevista(idCandidato,idEmpleado,fecha,plataforma,feedback) values(";
+            sql += ent.getIdCandidato() + ",";
+            sql += ent.getIdUsuario() + ",";
+            sql += ent.getFecha() + ",";
+            sql += "'" + ent.getPlataforma() + "',";
+            sql += "'" + ent.getFeedback() + "')";
             st.executeUpdate(sql);
             st.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
+    } 
     /**
-     * getMaxIdCandidato() calcula el id máximo exixstente en la tabla le suma
-     * uno, y regresa el id que debe ser insertado
-     *
-     * @return int
-     */
-    public static int getMaxIdEntrevista() {
-        if (con == null) {
-            try {
-                createConnection();
-            } catch (SQLException ex) {
-                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        int id = 0;
-        try {
-            Statement st = con.createStatement();
-            String sql;
-            sql = "Select count(*) from entrevista";
-            ResultSet results = st.executeQuery(sql);
-            id = results.getInt(1) + 1;
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return id;
-    }
-
-    /**
-     * Dado un id, regresa el resto de los datos del candidato y los almacena en
-     * una variable de tipo Candidato
+     * Dado un id, regresa el resto de los datos de la entrevista y los almacena en
+     * una variable de tipo Entrevista
      *
      * @param id
      * @return Candidato
@@ -514,9 +449,8 @@ public class DBHandler {
         }
         return ent;
     }
-
     /**
-     * borraCandidatos(id) funcion qie borra un candidato dado un id
+     * borraEntrevista(id) funcion qie borra un entrevista dado un id
      *
      * @param id
      */
@@ -540,7 +474,52 @@ public class DBHandler {
         }
     }
     //</editor-fold>
+    
+    //<editor-fold desc="Reportes">
+    public static Reporte reporte(String titulo,String universidad,String certificados,String nombreUsuario,String puesto) {
+        Reporte rep = null;
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        Entrevista ent = null;
+        try {
+            Statement st = con.createStatement();
+            String sql;            
+            sql = "select a.nombre,a.titulo,a.universidad,a.certificados,"
+                    + "c.nombre,a.puesto,(case when a.id in (select"
+                    + " b.idCandidato from empleado) then 'empleado else candidato end)"
+                    + " from candidato as a,empleado as b, usuario as c,entrevista as d"
+                    + "where a.id=b.idCandidato and c.id=d.idUsuario";
+            ResultSet results = st.executeQuery(sql);
+            String nombre = results.getString(1);
+            String tit = results.getString(2);
+            String uni = results.getString(3);
+            String cert = results.getString(4);
+            String nombreEntrevistador = results.getString(5);
+            String p = results.getString(6);
+            String estatus = results.getString(7);
+            
+            rep = new Reporte(nombre,tit,uni,cert,nombreEntrevistador,p,estatus);
 
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rep;
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Usuario">
+    /**
+     * Funcion que realiza login
+     * @param user
+     * @param pass
+     * @return 
+     */
     public static boolean getUser(String user, String pass) {
         if (con == null) {
             try {
@@ -563,4 +542,33 @@ public class DBHandler {
 
         return false;
     }
+    /**
+     * actualiza password de usuario
+     * @param email
+     * @param password 
+     */
+    public static void changePassword(String email,String password)
+    {
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            Statement statement = con.createStatement();
+             String sql;
+            sql = "update usuario set "; 
+            sql += "password=" + password;
+            sql += "where email = " + email;
+            statement.executeUpdate(sql);
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+       
+    }
+    //</editor-fold>
 }
