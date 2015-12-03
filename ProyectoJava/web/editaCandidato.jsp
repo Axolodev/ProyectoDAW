@@ -143,15 +143,20 @@
 
             function editaDatos(indice) {
                 var form = document.getElementById("informacion_cliente");
+                
                 var elements = form.elements;
-                for (var i = 0; i < elements.length; i++) {
+                for (var i = 0, j = 0; i < elements.length; i++, j++) {
                     elements[i].readOnly = false;
-                    elements[i].value = clientes[indice][i];
+                    elements[i].value = clientes[indice][j];
+                    if(i === 6 || i === 11) {
+                        j --;
+                    }
                 }
             }
             
             function deshabilitaForma() {
                 var form = document.getElementById("informacion_cliente");
+                
                 var elements = form.elements;
                 for (var i = 0; i < elements.length; i++) {
                     elements[i].readOnly = true;
@@ -178,7 +183,6 @@
             <br />
             <br />
             <form id="informacion_cliente">
-
                 <fieldset>
                     <legend>Datos Personales</legend>
                     <div class="inputs">
@@ -224,29 +228,33 @@
                 <br/>
 
                 <button type="reset" onclick="deshabilitaForma()">Reset</button>
-                <button type="reset" onclick="deshabilitaForma()">Guardar</button>
+                <button type="submit" >Guardar</button>
             </form>
         </div>
 
     </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
-        /*
+
         $(document).ready(function () {
             $("#informacion_cliente").submit(function (event) {
                 event.preventDefault();
-                $("#loginError").slideUp(500);
+                console.log(1);
                 $.ajax({
                     type: "POST",
-                    url: "",
+                    url: "candidatos.jsp?operacion=editar",
                     data: $(this).serialize(),
                     success: function (data) {
-
+                        console.log(data);
+                        if(data === "Editar"){
+                            deshabilitaForma();
+                        }
                     }
                 });
 
             });
         });
-*/
+
     </script>
 
 </html>
