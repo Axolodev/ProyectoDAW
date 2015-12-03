@@ -3,7 +3,13 @@
     Created on : 26-oct-2015, 19:56:10
     Author     : Adriana, Mayra y Roberto
 --%>
-
+<%
+    System.out.println(session.getAttribute("user"));
+    if (session.getAttribute("user") == null) {
+        String redirectURL = "Login.jsp";
+        response.sendRedirect(redirectURL);
+    }
+%>
 <!DOCTYPE html>
   <html>
     <head>
@@ -20,7 +26,7 @@
         <div id="barra1-2">
             <a href="Home.jsp"><i class="fa fa-home" style="font-size:30px"></i></a>
             <a href="Configuracion.jsp"><i class="fa fa-cog" style="font-size:30px"></i></a>
-            <a href="Login.jsp"><i class="fa fa-sign-out" style="font-size:30px"></i></a> 
+            <a href="Controller?operacion=logout"><i class="fa fa-sign-out" style="font-size:30px"></i></a> 
         </div> 
       </div>
       <div id="barra2">   

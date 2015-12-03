@@ -8,13 +8,6 @@
 <%@include file="header.jsp"%>
 
 <html>
-
-    <%
-        if (session.getAttribute("user") == null) {
-            response.sendRedirect("/Mensajeria/login.jsp");
-        }
-    %>
-
     <body onload="HoraActual()">
         <div id="msj">
             <h1>BIENVENIDO AL SISTEMA DE CAPITAL HUMANO</h1>

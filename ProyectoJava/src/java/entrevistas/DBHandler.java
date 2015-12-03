@@ -557,13 +557,13 @@ public class DBHandler {
             }
         }
         try {
-            Statement statement = con.createStatement();
-             String sql;
-            sql = "update usuario set "; 
-            sql += "password=" + password;
-            sql += "where email = " + email;
-            statement.executeUpdate(sql);
-            statement.close();
+            try (Statement statement = con.createStatement()) {
+                String sql;
+                sql = "update usuario set ";
+                sql += "password ='" + password;
+                sql += "' where email = '" + email + "'";
+                statement.executeUpdate(sql);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }

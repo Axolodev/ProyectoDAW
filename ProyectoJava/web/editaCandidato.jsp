@@ -7,11 +7,6 @@
 
 <html>
 
-    <%
-        if (session.getAttribute("user") == null) {
-            response.sendRedirect("/Mensajeria/login.jsp");
-        }
-    %>
     <%@include file="header.jsp"%>
 
     <head>

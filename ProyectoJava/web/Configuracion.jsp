@@ -8,14 +8,7 @@
 <%@include file="header.jsp"%>
 
 <html>
-
-    <%
-        if (session.getAttribute("user") == null) {
-            response.sendRedirect("/Mensajeria/login.jsp");
-        }
-    %>
-
-    <form name="nuevoCandidato" action="servidor.html" method="get">
+    <form name="nuevoCandidato" action="Controller?operacion=configuracion" method="post">
         <div>
             <h1>MODIFICAR DATOS </h1>
             <div class="inputs">

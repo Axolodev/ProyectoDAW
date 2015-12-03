@@ -9,12 +9,6 @@
 
 <html>
 
-    <%
-       if (session.getAttribute("user") == null) {
-            response.sendRedirect("/Mensajeria/login.jsp");
-        }
-    %>
-
     <form name="nuevoEmpleado" action="Controller?operacion=nuevoEmpleado" method="post">
         <div>
             <h1>NUEVO EMPLEADO</h1>

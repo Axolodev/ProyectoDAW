@@ -104,8 +104,6 @@ public class Controller extends HttpServlet {
 
                 url = "/Home.jsp";
             } else if (op.equals("nuevaEntrevista")) {
-
-                String nombre = (String) session.getAttribute("nombre");
                 int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
                 int idEntrevistador = Integer.valueOf(request.getParameter("idEntrevistador"));
                 String fecha = request.getParameter("fecha");
@@ -119,7 +117,7 @@ public class Controller extends HttpServlet {
             } 
             
             else if (op.equals("nuevoCandidato")) {
-                String nombre = (String) session.getAttribute("nombre");
+                
                 String nombreC = request.getParameter("nombre");
                 String telefono = request.getParameter("telefono");
                 String correo = request.getParameter("email");
@@ -145,6 +143,12 @@ public class Controller extends HttpServlet {
                 url = "/Home.jsp";
             } else if (op.equals("logout")) {
                 session.setAttribute("user", null);
+                url = "/Login.jsp";
+            } else if (op.equals("configuracion")){
+                String email = request.getParameter("email");
+                String password = request.getParameter("password");
+                DBHandler.changePassword(email, password);
+                url = "/Home.jsp";
             }
         }
         ServletContext sc = this.getServletContext();

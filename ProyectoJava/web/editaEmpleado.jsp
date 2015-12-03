@@ -7,13 +7,7 @@
 <!DOCTYPE html>
 
 <html>
-
-    <%
-        if (session.getAttribute("user") == null) {
-            response.sendRedirect("/Mensajeria/login.jsp");
-        }
-    %>    
-
+    <%@include file="header.jsp"%>
     <head>
         <title>modificar empleados</title>
         <meta charset="UTF-8" />
@@ -197,41 +191,6 @@
 
     <body onload="llenaTabla();
             deshabilitaForma()">
-        <div id="barra1">
-            <div id="barra1-2">
-                <button class="btn"><i class="fa fa-home"></i></button>
-                <button class="btn"><i class="fa fa-cog"></i></button>
-                <button class="btn"><i class="fa fa-sign-out"></i></button>
-            </div>
-        </div>
-        <div id="barra2">
-            <ul>
-                <li>
-                    Candidatos
-                    <ul>
-                        <li>Agregar nuevo</li>
-                        <li>Modificar/Eliminar</li>
-                    </ul>
-                </li>
-                <li>Entrevista
-                    <ul>
-                        <li>Agendar</li>
-                        <li>Modificar existente</li>
-                    </ul>
-                </li>
-                <li>Empleados
-                    <ul>
-                        <li>Agregar</li>
-                        <li>Modificar/Eliminar</li>
-                    </ul>
-                </li>
-                <li>Reportes
-                    <ul>
-                        <li>Generar</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
         <br/>
         <br/>
         <br/>

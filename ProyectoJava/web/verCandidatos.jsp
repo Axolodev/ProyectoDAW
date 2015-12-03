@@ -8,13 +8,6 @@
 <%@include file="header.jsp"%>
 
 <html>
-
-    <% 
-         if (session.getAttribute("user") == null) {
-         response.sendRedirect("/Mensajeria/login.jsp");
-         }
-    %>
-
     <form name="nuevoCandidato" action="" method="get">
         <div>
             <h1>NUEVO CANDIDATO </h1>
