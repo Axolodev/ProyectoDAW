@@ -136,7 +136,7 @@ public class Controller extends HttpServlet {
                 DBHandler.nuevoCandidato(c);
                 url = "/Home.jsp";
             } else if (op.equals("nuevoEmpleado")) {
-                int idCand = (int) session.getAttribute("id");
+                int idCand = Integer.valueOf(request.getParameter("id"));
                 int salario = Integer.valueOf(request.getParameter("salario"));
                 int vacaciones = Integer.valueOf(request.getParameter("vacaciones"));
 

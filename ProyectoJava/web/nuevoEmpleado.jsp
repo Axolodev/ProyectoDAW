@@ -15,7 +15,7 @@
         }
     %>
 
-    <form name="nuevoEmpleado" action="Controller?operacion=nuevoEmpleado" method="get">
+    <form name="nuevoEmpleado" action="Controller?operacion=nuevoEmpleado" method="post">
         <div>
             <h1>NUEVO EMPLEADO</h1>
             <fieldset>
