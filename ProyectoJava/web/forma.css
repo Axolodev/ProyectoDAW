@@ -62,13 +62,18 @@ input ,textarea{
 
 a:hover{
     color:blueviolet;
+    text-decoration: none;
+}
+a li:hover{
+    color:azure;
+    text-decoration: none;
 }
 a:click{
     color:blueviolet;
 }
 a:visited
 {
-    color:grey;
+    color:white;
 }
 a:active
 {

@@ -20,26 +20,6 @@
             <h1>BIENVENIDO AL SISTEMA DE CAPITAL HUMANO</h1>
             <h2 id="Fecha"></h2>
         </div>
-
-    <!--    <a href="Controlador?operacion=editaCandidato">
-            editar candidato
-        </a><br/><br/>
-        <a href="Controlador?operacion=editaEmpleado">
-            editar empleado
-        </a><br/><br/>
-        <a href="Controlador?operacion=nuevaEntrevista">
-            nueva entrevista
-        </a><br/><br/>
-        <a href="Controlador?operacion=nuevoCandidato">
-            nuevo candidato
-        </a><br/><br/>
-        <a href="Controlador?operacion=nuevoEmpleado">
-            nuevo empleado
-        </a><br/><br/>
-
-        <a href="Controlador?operacion=logout">
-            logout
-        </a> -->
     </body>
 
     <script>

@@ -12,6 +12,7 @@
             response.sendRedirect("/Mensajeria/login.jsp");
         }
     %>
+    <%@include file="header.jsp"%>
 
     <head>
         <title>modificar clientes</title>
@@ -191,41 +192,6 @@
 
     <body onload="llenaTabla();
             deshabilitaForma()">
-        <div id="barra1"> 
-            <div id="barra1-2">
-                <a href="Home.jsp"><i class="fa fa-home" style="font-size:30px"></i></a>
-                <a href="Configuracion.jsp"><i class="fa fa-cog" style="font-size:30px"></i></a>
-                <a href="Login.jsp"><i class="fa fa-sign-out" style="font-size:30px"></i></a> 
-            </div> 
-        </div>
-        <div id="barra2">   
-            <ul>
-                <li>
-                    Candidatos
-                    <ul>
-                        <li><a href="nuevoCandidato.jsp">Agregar Nuevo</a></li>
-                        <li><a href="editaCandidato.jsp">Modificar/Eliminar</a></li>
-                    </ul>
-                </li>
-                <li>Entrevista
-                    <ul>
-                        <li><a href="nuevaEntrevista.jsp">Agendar</a></li>
-                        <li><a href="#">Modificar existente</a></li>
-                    </ul>
-                </li>
-                <li>Empleados
-                    <ul>
-                        <li><a href="#">Agregar</a></li>
-                        <li><a href="#">Modificar/Eliminar</a></li>
-                    </ul>
-                </li>          
-                <li>Reportes
-                    <ul>
-                        <li><a href="#">Generar</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
         <h1 style="margin-left:25%;">Edita o Elimina Candidato</h1>
         <div id="main_container">
             <table id="clientes">

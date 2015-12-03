@@ -177,7 +177,7 @@
                         return function () {
                             // funcion temporal para simular borrado de elemento
                             console.log("elemento " + currentI + "borrado");
-                        }
+                        };
                     })();
 
                     tabla_empleados.appendChild(tr);
