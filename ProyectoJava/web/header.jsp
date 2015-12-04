@@ -40,7 +40,7 @@
           <li>Entrevista
             <ul>
                 <li><a href="nuevaEntrevista.jsp">Agendar</a></li>
-                <li><a href="#">Modificar existente</a></li>
+                <li><a href="Controller?operacion=dameEntrevistas">Modificar existente</a></li>
             </ul>
          </li>
         <li>Empleados

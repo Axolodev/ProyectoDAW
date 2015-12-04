@@ -16,7 +16,7 @@
                 <div class="inputs">
                     <input class="form-control" type="text" name="idCandidato" placeholder="ID Candidato"/>
                     <br/>
-                    <input class="form-control" type="text" name="idEntrevistador" placeholder="ID Entrevistador"/>
+                    <input class="form-control" type="text" name="idEntrevistador" placeholder="ID Usuario (Entrevistador)"/>
                     <br/>
                     <input class="form-control" type="date" name="fechaEntrevista" placeholder=" Fecha Entrevista"/>
                     <br/>

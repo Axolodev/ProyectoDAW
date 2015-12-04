@@ -485,7 +485,7 @@ public class DBHandler {
         try {
             Statement st = con.createStatement();
             String sql;
-            sql = "delete from entrevista where id = " + id;
+            sql = "delete from entrevista where id = '" + id + "'";
             st.executeUpdate(sql);
             st.close();
 
@@ -603,6 +603,39 @@ public class DBHandler {
         return null;
     }
 
+    
+    public static ArrayList dameEntrevistas() {
+
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            try (Statement statement = con.createStatement()) {
+                ArrayList<Entrevista> lista;
+                lista = new ArrayList<>();
+                ResultSet results = statement.executeQuery("Select * from entrevista");
+                while (results.next()) {
+                    Entrevista can = new Entrevista(
+                            results.getInt("idCandidato"), 
+                            results.getInt("idUsuario"), 
+                            results.getDate("fecha"),
+                            results.getString("plataforma").replaceAll("\\s+", " "), 
+                            results.getString("feedback").replaceAll("\\s+", " "));
+                    can.setIdEntrevista(results.getInt("id"));
+                    lista.add(can);
+                }
+                return lista;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     /**
      * actualiza password de usuario
      *

@@ -42,7 +42,7 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ParseException {
 
-        DateFormat format = new SimpleDateFormat("yyyy-MM-17", Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
         // Hacer login. Done.
         String op = request.getParameter("operacion");
@@ -87,7 +87,9 @@ public class Controller extends HttpServlet {
 
                 url = "/Home.jsp";
             } else if (op.equals("nuevaEntrevista")) {
+                System.out.println(request.getParameter("idCandidato"));
                 int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
+                System.out.println(request.getParameter("idEntrevistador"));
                 int idEntrevistador = Integer.valueOf(request.getParameter("idEntrevistador"));
                 String fecha = request.getParameter("fechaEntrevista");
                 String plataforma = request.getParameter("plataforma");
@@ -135,6 +137,21 @@ public class Controller extends HttpServlet {
                 ArrayList<Candidato> al = DBHandler.dameCandidatos();
                 request.setAttribute("lista", al);
                 url = "/editaCandidato.jsp";
+            }else if (op.equals("dameEntrevistas")) {
+                ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
+                request.setAttribute("lista", al);
+                url = "/editaEntrevista.jsp";
+            }else if (op.equals("borraEntrevista")) {
+                ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
+                request.setAttribute("lista", al);
+                int id = Integer.valueOf(request.getParameter("idEntrevista"));
+                DBHandler.borraEntrevista(id);
+                url = "/Home.jsp";
+            }else if (op.equals("editarEntrevista")) {
+                ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
+                request.setAttribute("lista", al);
+                int id = Integer.valueOf(request.getParameter("idEntrevista"));
+                url = "/editaEntrevista.jsp?idEntrevista=" + id;
             }
         }
         if (op.equals("editaCandidato")) {
