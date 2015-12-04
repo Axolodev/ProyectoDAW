@@ -153,6 +153,19 @@ public class Controller extends HttpServlet {
                 int id = Integer.valueOf(request.getParameter("idEntrevista"));
                 url = "/editaEntrevista.jsp?idEntrevista=" + id;
             }
+            else if (op.equals("editarEmpleado")) {
+                ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
+                request.setAttribute("lista", al);
+                int id = Integer.valueOf(request.getParameter("idEmpleado"));
+                url = "/editaEnmpleado.jsp?idEmpleado=" + id;
+            }
+            else if (op.equals("borraEmpleado")) {
+                ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
+                request.setAttribute("lista", al);
+                int id = Integer.valueOf(request.getParameter("idEmpleado"));
+                DBHandler.borraEntrevista(id);
+                url = "/Home.jsp";
+            }
         }
         if (op.equals("editaCandidato")) {
             int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
