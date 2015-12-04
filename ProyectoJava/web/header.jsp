@@ -51,7 +51,8 @@
         </li>          
         <li>Reportes
           <ul>
-              <li><a href="#">Generar</a></li>
+              <!--Kappa-->
+              <li><a href="Controller?operacion=dameTodo">Generar</a></li>
           </ul>
         </li>
       </ul>

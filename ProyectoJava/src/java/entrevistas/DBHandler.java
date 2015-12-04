@@ -636,6 +636,38 @@ public class DBHandler {
         }
         return null;
     }
+    
+    public static ArrayList dameEmpleados() {
+
+        if (con == null) {
+            try {
+                createConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            try (Statement statement = con.createStatement()) {
+                ArrayList<Empleado> lista;
+                lista = new ArrayList<>();
+                ResultSet results = statement.executeQuery("Select * from empleado");
+                while (results.next()) {
+                    Empleado can = new Empleado(results.getInt("idCandidato"),
+                            results.getDouble("salario"), 
+                            results.getInt("diasVacaciones"));
+                    can.setIdCandidato(results.getInt("id"));
+                    lista.add(can);
+                }
+                return lista;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
     /**
      * actualiza password de usuario
      *

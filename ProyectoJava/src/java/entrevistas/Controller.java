@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import jdk.nashorn.internal.parser.JSONParser;
 
 /**
  *
@@ -137,39 +138,45 @@ public class Controller extends HttpServlet {
                 ArrayList<Candidato> al = DBHandler.dameCandidatos();
                 request.setAttribute("lista", al);
                 url = "/editaCandidato.jsp";
-            }else if (op.equals("dameEntrevistas")) {
+            } else if (op.equals("dameEntrevistas")) {
                 ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
                 request.setAttribute("lista", al);
                 url = "/editaEntrevista.jsp";
-            }else if (op.equals("borraEntrevista")) {
+            } else if (op.equals("borraEntrevista")) {
                 ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
                 request.setAttribute("lista", al);
                 int id = Integer.valueOf(request.getParameter("idEntrevista"));
                 DBHandler.borraEntrevista(id);
                 url = "/Home.jsp";
-            }else if (op.equals("editarEntrevista")) {
+            } else if (op.equals("editarEntrevista")) {
                 ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
                 request.setAttribute("lista", al);
                 int id = Integer.valueOf(request.getParameter("idEntrevista"));
                 url = "/editaEntrevista.jsp?idEntrevista=" + id;
-            }
-            else if (op.equals("editarEmpleado")) {
+            } else if (op.equals("editarEmpleado")) {
                 ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
                 request.setAttribute("lista", al);
                 int id = Integer.valueOf(request.getParameter("idEmpleado"));
                 url = "/editaEnmpleado.jsp?idEmpleado=" + id;
-            }
-            else if (op.equals("borraEmpleado")) {
+            } else if (op.equals("borraEmpleado")) {
                 ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
                 request.setAttribute("lista", al);
                 int id = Integer.valueOf(request.getParameter("idEmpleado"));
                 DBHandler.borraEntrevista(id);
                 url = "/Home.jsp";
+            } else if(op.equals("dameTodo")){
+                ArrayList<Empleado> em =DBHandler.dameEmpleados();
+                request.setAttribute("listaEmpleados", em);
+                ArrayList<Entrevista> en = DBHandler.dameEntrevistas();
+                request.setAttribute("listaEntrevistas", en);
+                ArrayList<Candidato> ca = DBHandler.dameCandidatos();
+                request.setAttribute("listaCandidatos", ca);
+                url = "/GeneraReporte.jsp";
             }
         }
         if (op.equals("editaCandidato")) {
             int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
-            
+
             String nombreC = request.getParameter("nombre");
             String telefono = request.getParameter("telefono");
             String correo = request.getParameter("email");
@@ -187,7 +194,7 @@ public class Controller extends HttpServlet {
             DBHandler.editaCandidato(c);
 
             url = "/candidatos.jsp?operacion=editar";
-        } else if(op.equals("borrarCandidato")){
+        } else if (op.equals("borrarCandidato")) {
             int id = Integer.valueOf(request.getParameter("idCandidato"));
             DBHandler.borraCandidato(id);
             url = "/candidatos.jsp?operacion=borrar";
