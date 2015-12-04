@@ -15,8 +15,7 @@ form>div{
 }
 
 fieldset{
-	border-color: #909dec;
-	border-width: 2px;
+        border: 2px solid #909dec;
 }
 
 div>h1{
@@ -27,10 +26,18 @@ div>h1{
 }
 
 legend{
+        width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
 	font:"tw cen ms";
 	font-size: 23px;
 	font-weight: 700;
 	color:#1A1A1A;
+}
+
+.inputs{
+    margin-left: 12%;
+    width : 80%;
 }
 table{
 	font-weight: 600;
@@ -44,7 +51,9 @@ td{
 input ,textarea{
 	width:210px;
 }
-
+td input {
+    width: 15px;
+}
 #envia{
 	background-color:#909dec;
 	border:none;
@@ -55,13 +64,18 @@ input ,textarea{
 
 a:hover{
     color:blueviolet;
+    text-decoration: none;
+}
+a li:hover{
+    color:azure;
+    text-decoration: none;
 }
 a:click{
     color:blueviolet;
 }
 a:visited
 {
-    color:grey;
+    color:white;
 }
 a:active
 {

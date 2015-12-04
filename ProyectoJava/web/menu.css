@@ -16,45 +16,44 @@ and open the template in the editor.
 
 body{
   background-color: #DFE1EC;
+  margin: 0px;
 }
 
 #barra1 {
-    height:50px;
-    background-color: #fff;
-    margin: -5px -5px 0px -5px;
+    background-color: #405473;
+    width:100%;
 }
 
 #barra1-2{
-  padding-left: 86%;
+    position:relative;
+    width: 10%;
+    left:90%;
 }
 
 #barra2 {
   position:relative;
-  margin-top: 40px;
-  margin-left:-6px;
-  margin-right: -6px;
-  padding-left: 29%;
-  height:60px;
   background-color: #405473;
+  -webkit-box-shadow: 0 10px 20px 5px rgba(100, 100, 100, 0.35);
+  -moz-box-shadow: 0 10px 20px 5px rgba(100, 100, 100, 0.35);
+  box-shadow: 0 10px 20px 5px rgba(100, 100, 100, 0.35);
 }
 
 ul {
   text-align: left;
   display: inline;
   margin: 0;
-  padding: 15px 10% 17px 0;
+  padding: 15px 0 17px 0;
   list-style: none;
-  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  
 }
+
 ul li {
   font:18px sans-serif;
   font-weight: 600;
   display: inline-block;
   background-color:#405473;
   border:none;
-  color:#B8B8B8;
+  color:#ffffff;
   margin-right: -4px;
   position: relative;
   padding: 20px 50px;
@@ -64,6 +63,9 @@ ul li {
   -ms-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
+  
+  border: 1px solid white;
+  border-bottom: none;
 }
 ul li:hover {
   background: #656EA5;
@@ -86,18 +88,30 @@ ul li ul {
   -ms-transition: opacity 0.2s;
   -o-transition: opacity 0.2s;
   -transition: opacity 0.2s;
+  color: #FFFFFF;
 }
 ul li ul li { 
   background: #656EA5; 
   display: block; 
-    font-size:15px;
+  font-size:15px;
   color: #fff;
   text-shadow: 0 -1px 0 #000;
+}
+
+ul li ul li a { 
+  color: #fff;
+  text-shadow: 0 -1px 0 #000;
+  text-decoration : none;
 }
 
 ul>li>ul>li:hover{
 background-color: #939AC0;
 z-index: 3;
+color:#ffffff;
+}
+
+ul>li>ul>li>a:hover{
+color:#fff;
 }
 
 ul li:hover ul {
@@ -113,3 +127,10 @@ ul li:hover ul {
   font-weight: 600;
 }
 
+a:visited {
+    color:white;
+}
+
+li + li {
+    border-left: none;
+}

@@ -8,11 +8,11 @@
 <%@include file="header.jsp"%>
 
 <html>
-    <form name="nuevoCandidato" action="Controller?operacion=nuevoCandidato" method="post">
+    <form name="nuevoCandidato" action="" method="get">
         <div>
             <h1>NUEVO CANDIDATO </h1>
             <fieldset>
-                <legend>Datos Personales</legend>
+                <legend></legend>
                 <div class="inputs">
                     <input class="form-control" type="text" name="nombre" placeholder="Nombre"/>
                     <br/>
@@ -30,8 +30,6 @@
             <fieldset>
                 <legend>Estudios</legend>
                 <div class="inputs">
-                    <input class="form-control" type="text" name="estudios" placeholder="Estudios"/>
-                    <br/>
                     <input class="form-control" type="text" name="titulo" placeholder="Título"/>
                     <br/>
                     <input class="form-control" type="text" name="universidad" placeholder="Universidad"/>
@@ -44,8 +42,6 @@
             <fieldset>
                 <legend>Experiencia y Expectativas</legend>
                 <div class="inputs">
-                    <input class="form-control" type="number" name="experiencia" placeholder="Años Experiencia"/>
-                    <br/>
                     <input class="form-control" type="text" name="trabajoAnt" placeholder="Puesto Anterior"/>
                     <br/>
                     <input class="form-control" type="text" name="salario" placeholder="Expectativa Salario"/>

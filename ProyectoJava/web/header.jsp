@@ -3,14 +3,21 @@
     Created on : 26-oct-2015, 19:56:10
     Author     : Adriana, Mayra y Roberto
 --%>
-
+<%
+    if (session.getAttribute("user") == null) {
+        String redirectURL = "Login.jsp";
+        response.sendRedirect(redirectURL);
+    }
+%>
 <!DOCTYPE html>
   <html>
     <head>
       <title>Nuevo Candidato</title>
       <meta charset="UTF-8" />
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="menu.css">
       <link rel="stylesheet" type="text/css" href="forma.css">
+      
       <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     </head>
     <body>
@@ -18,7 +25,7 @@
         <div id="barra1-2">
             <a href="Home.jsp"><i class="fa fa-home" style="font-size:30px"></i></a>
             <a href="Configuracion.jsp"><i class="fa fa-cog" style="font-size:30px"></i></a>
-            <a href="Login.jsp"><i class="fa fa-sign-out" style="font-size:30px"></i></a> 
+            <a href="Controller?operacion=logout"><i class="fa fa-sign-out" style="font-size:30px"></i></a> 
         </div> 
       </div>
       <div id="barra2">   
@@ -26,25 +33,26 @@
           <li>
             Candidatos
             <ul>
-                <li><a href="nuevoCandidato.jsp">Agregar nuevo</a></li>
-                <li><a href="editaCandidato.jsp">Modificar/Eliminar</a></li>
+                <li><a href="nuevoCandidato.jsp">Agregar Nuevo</a></li>
+                <li><a href="Controller?operacion=dameCandidatos">Modificar/Eliminar</a></li>
             </ul>
           </li>
           <li>Entrevista
             <ul>
                 <li><a href="nuevaEntrevista.jsp">Agendar</a></li>
-              <li>Modificar existente</li>
+                <li><a href="Controller?operacion=dameEntrevistas">Modificar existente</a></li>
             </ul>
          </li>
         <li>Empleados
           <ul>
-            <li>Agregar</li>
-            <li>Modificar/Eliminar</li>
+              <li><a href="nuevoEmpleado.jsp">Agregar</a></li>
+              <li><a href="Controller?operacion=dameEmpleados">Modificar/Eliminar</a></li>
           </ul>
         </li>          
         <li>Reportes
           <ul>
-            <li>Generar</li>
+              <!--Kappa-->
+              <li><a href="Controller?operacion=dameTodo">Generar</a></li>
           </ul>
         </li>
       </ul>

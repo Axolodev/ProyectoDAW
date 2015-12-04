@@ -6,59 +6,32 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="header.jsp"%>
-<form name="nuevoEmpleado" action="" method="get">
-      <div>
-        <h1>NUEVO EMPLEADO</h1>
-        <fieldset>
-          <legend>Datos Personales</legend>
-          <table>
-            <tr>
-              <td>
-                Número de Candidato:
-              </td>
-              <td>
-                 <input type="number" name="id"/>
-              </td>
-              <td>
-                Nombre:
-              </td>
-              <td>
-                <input type="text" name="nombre" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Puesto:
-                </td>
-                <td>
-                  <input type="text" name="puesto" />
-                </td>
-                <td>
-                  Salario
-                </td>
-                <td>
-                  <input type="text" name="salario" />
-                </td>
-            </tr>
-            <tr>
-              <td>
-                Dias de vacaciones
-              </td>
-              <td>
-                <input type="number" name="vacaciones" />
-              </td>
-            </tr>
-          </table>
-        </fieldset>        
-        <br/><br/>
-        <input type="submit" name="enviar" id="envia" valor="Guardar"/>
-        <br/>
-        <br/>
-        <br/>
-      </div>
+
+<html>
+
+    <form name="nuevoEmpleado" action="Controller?operacion=nuevoEmpleado" method="post">
+        <div>
+            <h1>NUEVO EMPLEADO</h1>
+            <fieldset>
+                <legend>Datos Personales</legend>
+                <div class="inputs">
+                    <input class="form-control" type="text" name="id" placeholder="ID Candidato"/>
+                    <br/>
+                    <input class="form-control" type="text" name="salario" placeholder="salario"/>
+                    <br/>
+                    <input class="form-control" type="text" name="vacaciones" placeholder="Dias Vacaciones"/>
+                    <br/>
+                </div>
+            </fieldset>        
+            <br/><br/>
+            <input class="btn btn-default" type="submit" name="enviar" id="envia" value="Guardar"/>
+            <br/>
+            <br/>
+            <br/>
+        </div>
     </form>
 
 
 
-  </body>
+</body>
 </html>
