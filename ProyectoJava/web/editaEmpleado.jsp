@@ -73,7 +73,8 @@
                     <th>Salario</th>
                     <th>diasVacaciones</th>
                 </tr>
-                <%                    ArrayList<Empleado> al = (ArrayList) request.getAttribute("listaEmpleados");
+                <%                    
+                    ArrayList<Empleado> al = (ArrayList) request.getAttribute("listaEmpleados");
                     String st = request.getParameter("idEmpleado");
                     Empleado e = null;
                     int idR = 0;
@@ -88,7 +89,7 @@
                         out.print("<tr>");
                         Empleado en = al.get(i);
                         if (idR == en.getIdEmpleado()) {
-                            e = en;
+                            e = al.get(i);
                         }
                 %>
                 <td><%=en.getIdEmpleado()%></td>    
@@ -110,7 +111,7 @@
 
                 <legend>Datos de entrevista</legend>
                 <div class="inputs">
-                    <input class="form-control" type="text" name="idEmpleado" value="<%=e.getIdEmpleado()%>" disabled="true"/>
+                    <input class="form-control" type="hidden" name="idEmpleado" value="<%=e.getIdEmpleado()%>" />
                     <br/>
                     <input class="form-control" type="text" name="idCandidato" value="<%=e.getIdCandidato()%>"/>
                     <br/>

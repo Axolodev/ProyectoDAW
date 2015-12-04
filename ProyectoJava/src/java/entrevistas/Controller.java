@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import jdk.nashorn.internal.parser.JSONParser;
 
 /**
  *
@@ -154,11 +153,22 @@ public class Controller extends HttpServlet {
                 int id = Integer.valueOf(request.getParameter("idEntrevista"));
                 url = "/editaEntrevista.jsp?idEntrevista=" + id;
             } else if (op.equals("edicionEmpleado")) {
+                
+                int idd = Integer.valueOf(request.getParameter("idEmpleado"));
+                Empleado e = new Empleado(idd,
+                        Double.valueOf(request.getParameter("salario")), 
+                        Integer.valueOf(request.getParameter("diasVacaciones")));
+                e.setIdEmpleado(Integer.valueOf(request.getParameter("idEmpleado")));
+                DBHandler.editaEmpleado(e);
                 ArrayList<Empleado> em =DBHandler.dameEmpleados();
                 request.setAttribute("lista", em);
-                //Empleado e = new Empleado(Integer.valueOf(request.getAttribute("idCandidato")), 
-                        //Integer.valueOf(request.getAttribute("idEmpleado")), 0);
-                url = "/editaEmpleado.jsp?";
+                url = "/Home.jsp";
+            } else if (op.equals("editarEmpleado")) {
+                int idd = Integer.valueOf(request.getParameter("idEmpleado"));
+                System.out.println(idd);
+                ArrayList<Empleado> em =DBHandler.dameEmpleados();
+                request.setAttribute("listaEmpleados", em);
+                url = "/editaEmpleado.jsp?idEmpleado=" + idd;
             } else if (op.equals("borraEmpleado")) {
                 ArrayList<Empleado> em =DBHandler.dameEmpleados();
                 request.setAttribute("lista", em);

@@ -203,6 +203,20 @@ public class DBHandler {
                 Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        try {
+            System.out.println(emp.getIdEmpleado());
+            Statement st = con.createStatement();
+            String sql;
+            sql = "update empleado set ";
+            sql += "idCandidato= '" + emp.getIdCandidato() + "',";
+            sql += "salario='" + emp.getSalario() + "',";
+            sql += "diasVacaciones= '" + emp.getDiasVacaciones() + "'";
+            sql += "where id = '" + emp.getIdEmpleado()+ "';";
+            st.executeUpdate(sql);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
@@ -234,26 +248,6 @@ public class DBHandler {
         }
     }
 
-    /**
-     * actualiza los datos de un empleado dado un id de empleado
-     *
-     * @param emp
-     */
-    public static void actualizaTablaEmpleado(Empleado emp) {
-        try {
-            Statement st = con.createStatement();
-            String sql;
-            sql = "update empleado set ";
-            sql += "id=" + emp.getIdEmpleado() + ",";
-            sql += "salario=" + emp.getSalario() + ",";
-            sql += "diasVacaciones=" + emp.getDiasVacaciones() + ",";
-            sql += "where id = " + emp.getIdEmpleado();
-            st.executeUpdate(sql);
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     /**
      * nuevoempleado(emp) agrega un nuevo empleado a la base de datos realiza un
