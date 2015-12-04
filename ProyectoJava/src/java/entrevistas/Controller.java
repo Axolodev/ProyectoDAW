@@ -153,16 +153,17 @@ public class Controller extends HttpServlet {
                 request.setAttribute("lista", al);
                 int id = Integer.valueOf(request.getParameter("idEntrevista"));
                 url = "/editaEntrevista.jsp?idEntrevista=" + id;
-            } else if (op.equals("editarEmpleado")) {
-                ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
-                request.setAttribute("lista", al);
-                int id = Integer.valueOf(request.getParameter("idEmpleado"));
-                url = "/editaEnmpleado.jsp?idEmpleado=" + id;
+            } else if (op.equals("edicionEmpleado")) {
+                ArrayList<Empleado> em =DBHandler.dameEmpleados();
+                request.setAttribute("lista", em);
+                //Empleado e = new Empleado(Integer.valueOf(request.getAttribute("idCandidato")), 
+                        //Integer.valueOf(request.getAttribute("idEmpleado")), 0);
+                url = "/editaEmpleado.jsp?";
             } else if (op.equals("borraEmpleado")) {
-                ArrayList<Entrevista> al = DBHandler.dameEntrevistas();
-                request.setAttribute("lista", al);
+                ArrayList<Empleado> em =DBHandler.dameEmpleados();
+                request.setAttribute("lista", em);
                 int id = Integer.valueOf(request.getParameter("idEmpleado"));
-                DBHandler.borraEntrevista(id);
+                DBHandler.borraEmpleado(id);
                 url = "/Home.jsp";
             } else if(op.equals("dameTodo")){
                 ArrayList<Empleado> em =DBHandler.dameEmpleados();
@@ -172,6 +173,11 @@ public class Controller extends HttpServlet {
                 ArrayList<Candidato> ca = DBHandler.dameCandidatos();
                 request.setAttribute("listaCandidatos", ca);
                 url = "/GeneraReporte.jsp";
+            }else if(op.equals("dameEmpleados")){
+                ArrayList<Empleado> em = DBHandler.dameEmpleados();
+                request.setAttribute("listaEmpleados", em);
+                
+                url = "/editaEmpleado.jsp";
             }
         }
         if (op.equals("editaCandidato")) {

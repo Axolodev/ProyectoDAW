@@ -46,7 +46,7 @@
         <li>Empleados
           <ul>
               <li><a href="nuevoEmpleado.jsp">Agregar</a></li>
-              <li><a href="editaEmpleado.jsp">Modificar/Eliminar</a></li>
+              <li><a href="Controller?operacion=dameEmpleados">Modificar/Eliminar</a></li>
           </ul>
         </li>          
         <li>Reportes

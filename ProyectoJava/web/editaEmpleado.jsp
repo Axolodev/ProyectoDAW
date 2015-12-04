@@ -64,19 +64,16 @@
     </head>
 
     <body>
-        <h1 style="margin-left:25%;">Edita o Elimina Candidato</h1>
+        <h1 style="margin-left:25%;">Edita o Elimina Empleados</h1>
         <div id="main_container">
             <table id="clientes">
                 <tr>
                     <th>id</th>
-                    <th>nombre</th>
-                    <th>correo</th>
-                    <th>telefono</th>
-                    <th>puesto</th>
-                    <th>salario</th>
+                    <th>idCandidato</th>
+                    <th>Salario</th>
                     <th>diasVacaciones</th>
                 </tr>
-                <%                    ArrayList<Empleado> al = (ArrayList) request.getAttribute("lista");
+                <%                    ArrayList<Empleado> al = (ArrayList) request.getAttribute("listaEmpleados");
                     String st = request.getParameter("idEmpleado");
                     Empleado e = null;
                     int idR = 0;
@@ -95,10 +92,7 @@
                         }
                 %>
                 <td><%=en.getIdEmpleado()%></td>    
-                <td><%=en.getNombre()%></td>    
-                <td><%=en.getCorreo()%></td>    
-                <td><%=en.getTelefono()%></td>
-                <td><%=en.getPuesto()%></td>    
+                <td><%=en.getIdCandidato()%></td>    
                 <td><%=en.getSalario()%></td> 
                 <td><%=en.getDiasVacaciones()%></td>    
                 <td><input type="image" alt="submit" src="http://findicons.com/files/icons/1588/farm_fresh_web/16/pencil.png" id="<%=en.getIdEmpleado()%>" onclick="editMe(<%=en.getIdEmpleado()%>)"/></td>
@@ -116,17 +110,15 @@
 
                 <legend>Datos de entrevista</legend>
                 <div class="inputs">
-                    <input class="form-control" type="text" name="nombreEmpleado" value="<%=e.getNombre()%>"/>
+                    <input class="form-control" type="text" name="idEmpleado" value="<%=e.getIdEmpleado()%>" disabled="true"/>
                     <br/>
-                    <input class="form-control" type="text" name="correo" value="<%=e.getCorreo()%>"/>
-                    <br/>
-                    <input class="form-control" type="text" name="telefono" value="<%=e.getTelefono()%>"/>
-                    <br/>
-                    <input class="form-control" type="text" name="puesto" value="<%=e.getPuesto()%>"/>
+                    <input class="form-control" type="text" name="idCandidato" value="<%=e.getIdCandidato()%>"/>
                     <br/>
                     <input class="form-control" type="text" name="salario" value="<%=e.getSalario()%>"/>
                     <br/>  
                     <input class="form-control" type="text" name="diasVacaciones" value="<%=e.getDiasVacaciones()%>"/>
+                    <br/>  
+                    <input class="form-control" type="hidden" name="operacion" value="edicionEmpleado"/>
                     <br/>  
                 </div>
                 </fieldset>

@@ -203,8 +203,7 @@ public class DBHandler {
                 Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        actualizaTablaCandidato(emp);
-        actualizaTablaEmpleado(emp);
+        
     }
 
     /**
@@ -655,7 +654,7 @@ public class DBHandler {
                     Empleado can = new Empleado(results.getInt("idCandidato"),
                             results.getDouble("salario"), 
                             results.getInt("diasVacaciones"));
-                    can.setIdCandidato(results.getInt("id"));
+                    can.setIdEmpleado(results.getInt("id"));
                     lista.add(can);
                 }
                 return lista;
