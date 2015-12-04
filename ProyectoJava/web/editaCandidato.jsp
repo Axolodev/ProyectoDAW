@@ -140,6 +140,7 @@
                                     console.log(data);
                                 }
                             });
+                            console.log(clientes[currentI][0]);
                         };
                     })();
 
