@@ -37,7 +37,7 @@ public class DBHandler {
     /**
      * editaCanadiato(Candidato cand) Funcion que realiza un update a la tabla
      * candidatos recibe de paramtero un candidato que se recibe de la interfaz
-     * 
+     *
      * @param cand
      */
     public static void editaCandidato(Candidato cand) {
@@ -52,20 +52,20 @@ public class DBHandler {
 
             Statement st = con.createStatement();
             String sql;
-            sql = "update candidato set "; 
-            sql += "nombre=" + cand.getNombreCandidato() + ",";
-            sql += "email=" + cand.getEmailCandidato() + ",";
-            sql += "telefono=" + cand.getTelefono() + ",";
-            sql += "direccion=" + cand.getDireccion() + ",";
-            sql += "puesto=" + cand.getPuesto() + ",";
-            sql += "estudios=" + cand.getEstudios() + ",";
-            sql += "universidad=" + cand.getUniversidad() + ",";
-            sql += "titulo=" + cand.getTitulo() + ",";
-            sql += "certificados=" + cand.getCertificados() + ",";
-            sql += "experiencia=" + cand.getTimeExpereince() + ",";
-            sql += "puestoAnterior=" + cand.getPuestoAnterior() + ",";
-            sql += "expectativaSalario=" + cand.getExpectativaSalario() + ",";
-            sql += "where id = " + cand.getIdCandidato();
+            sql = "update candidato set ";
+            sql += "nombre='" + cand.getNombreCandidato() + "',";
+            sql += "email='" + cand.getEmailCandidato() + "',";
+            sql += "telefono='" + cand.getTelefono() + "',";
+            sql += "direccion='" + cand.getDireccion() + "',";
+            sql += "puesto='" + cand.getPuesto() + "',";
+            sql += "estudios='" + cand.getEstudios() + "',";
+            sql += "universidad='" + cand.getUniversidad() + "',";
+            sql += "titulo='" + cand.getTitulo() + "',";
+            sql += "certificados='" + cand.getCertificados() + "',";
+            sql += "experiencia='" + cand.getTimeExpereince() + "',";
+            sql += "puestoAnterior='" + cand.getPuestoAnterior() + "',";
+            sql += "expectativaSalario='" + cand.getExpectativaSalario() + "' ";
+            sql += "where id = '" + cand.getIdCandidato() + "'";
             st.executeUpdate(sql);
             st.close();
         } catch (SQLException ex) {
@@ -73,12 +73,13 @@ public class DBHandler {
         }
     }
 
+    
     /**
      * nuevoCandidato(Candidato cand) funcion que inserta un candidato a la
      * tabla candidato
      *
      * @param cand
-     * @return 
+     * @return
      */
     public static void nuevoCandidato(Candidato cand) {
         if (con == null) {
@@ -94,7 +95,7 @@ public class DBHandler {
                 sql = "insert into candidato(nombre, email, telefono, direccion, "
                         + "puesto, estudios, universidad, "
                         + "titulo, certificados, experiencia, "
-                        + "puestoAnterior, expectativaSalario)"  + " values(";
+                        + "puestoAnterior, expectativaSalario)" + " values(";
                 sql += " '" + cand.getNombreCandidato() + "',";
                 sql += " '" + cand.getEmailCandidato() + "',";
                 sql += " '" + cand.getTelefono() + "',";
@@ -108,12 +109,13 @@ public class DBHandler {
                 sql += " '" + cand.getPuestoAnterior() + "',";
                 sql += " '" + cand.getExpectativaSalario() + "')";
                 st.execute(sql);
-            }          
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Dado un id, regresa el resto de los datos del candidato y los almacena en
      * una variable de tipo Candidato
@@ -188,8 +190,10 @@ public class DBHandler {
 
     //<editor-fold desc="Empleados">
     /**
-     * manda llamar a las funciones actualizaTablaCandidato y actualizaTablaEmpleado
-     * @param emp  recibe un objeto empleado
+     * manda llamar a las funciones actualizaTablaCandidato y
+     * actualizaTablaEmpleado
+     *
+     * @param emp recibe un objeto empleado
      */
     public static void editaEmpleado(Empleado emp) {
         if (con == null) {
@@ -202,34 +206,39 @@ public class DBHandler {
         actualizaTablaCandidato(emp);
         actualizaTablaEmpleado(emp);
     }
+
     /**
-     * actualizaTablaCandidato actualiza los datos de un empleado que se encuentren en la tabvla de candidato dado un id de empleado
-     * @param emp 
+     * actualizaTablaCandidato actualiza los datos de un empleado que se
+     * encuentren en la tabvla de candidato dado un id de empleado
+     *
+     * @param emp
      */
     public static void actualizaTablaCandidato(Empleado emp) {
         try {
             Statement st = con.createStatement();
             String sql;
             sql = "update candidato set ";
-            sql += "nombre=" + emp.getNombre() + ",";
-            sql += "email=" + emp.getCorreo() + ",";
-            sql += "telefono=" + emp.getTelefono() + ",";
-            sql += "direccion=" + emp.getDireccion() + ",";
-            sql += "puesto=" + emp.getPuesto() + ",";
-            sql += "estudios=" + emp.getEstudios() + ",";
-            sql += "universidad=" + emp.getUniversidad() + ",";
-            sql += "titulo=" + emp.getTitulo() + ",";
-            sql += "certificados=" + emp.getCertificados() + ",";
-            sql += "where id = " + emp.getIdCandidato();
+            sql += "nombre='" + emp.getNombre() + "',";
+            sql += "email='" + emp.getCorreo() + "',";
+            sql += "telefono='" + emp.getTelefono() + "',";
+            sql += "direccion='" + emp.getDireccion() + "',";
+            sql += "puesto='" + emp.getPuesto() + "',";
+            sql += "estudios='" + emp.getEstudios() + "',";
+            sql += "universidad='" + emp.getUniversidad() + "',";
+            sql += "titulo='" + emp.getTitulo() + "',";
+            sql += "certificados='" + emp.getCertificados() + "',";
+            sql += "where id = '" + emp.getIdCandidato() + "'";
             st.executeUpdate(sql);
             st.close();
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * actualiza los datos de un empleado dado un id de empleado
-     * @param emp 
+     *
+     * @param emp
      */
     public static void actualizaTablaEmpleado(Empleado emp) {
         try {
@@ -246,11 +255,12 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
-     * nuevoempleado(emp)
-     * agrega un nuevo empleado a la base de datos
-     * realiza un link con la tabla de candidatos para no tener datos duplicados
-     * @param emp 
+     * nuevoempleado(emp) agrega un nuevo empleado a la base de datos realiza un
+     * link con la tabla de candidatos para no tener datos duplicados
+     *
+     * @param emp
      */
     public static void nuevoEmpleado(Empleado emp) {
         if (con == null) {
@@ -264,7 +274,7 @@ public class DBHandler {
             Statement st = con.createStatement();
             String sql;
             sql = "insert into empleado (idCandidato,salario,diasVacaciones) values(";
-            sql += emp.getIdCandidato() +",";
+            sql += emp.getIdCandidato() + ",";
             sql += emp.getSalario() + ",";
             sql += emp.getDiasVacaciones() + ")";
             st.executeUpdate(sql);
@@ -274,10 +284,12 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * despliega los datos de un empleado dado de parametro un id
+     *
      * @param id
-     * @return 
+     * @return
      */
     public static Empleado verEmpleado(int id) {
         if (con == null) {
@@ -325,9 +337,11 @@ public class DBHandler {
         }
         return emp;
     }
+
     /**
      * borra un empleado de la base de datos dado su id
-     * @param id 
+     *
+     * @param id
      */
     public static void borraEmpleado(int id) {
         if (con == null) {
@@ -350,7 +364,6 @@ public class DBHandler {
     }
 
     //</editor-fold>
-        
     //<editor-fold desc="Entrevistas">
     /**
      * editaEntrevista(Entrevista ent) Funcion que realiza un update a la tabla
@@ -368,7 +381,7 @@ public class DBHandler {
 
             Statement st = con.createStatement();
             String sql;
-            sql = "update entrevista set "; 
+            sql = "update entrevista set ";
             sql += "idCandidato=" + ent.getIdCandidato() + ",";
             sql += "idUsuario=" + ent.getIdUsuario() + ",";
             sql += "plataforma=" + ent.getPlataforma() + ",";
@@ -381,6 +394,7 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * nuevaEntrevista(Entrevista ent) funcion que inserta una entrevisat a la
      * tabla candidato
@@ -396,7 +410,7 @@ public class DBHandler {
             }
         }
         try {
-            Statement st = con.createStatement();   
+            Statement st = con.createStatement();
             Timestamp ts = new Timestamp(ent.getFecha().getTime());
             String sql;
             sql = "insert into entrevista(idCandidato,idUsuario,fecha,plataforma,feedback) values('";
@@ -412,10 +426,11 @@ public class DBHandler {
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
+    }
+
     /**
-     * Dado un id, regresa el resto de los datos de la entrevista y los almacena en
-     * una variable de tipo Entrevista
+     * Dado un id, regresa el resto de los datos de la entrevista y los almacena
+     * en una variable de tipo Entrevista
      *
      * @param id
      * @return Candidato
@@ -453,6 +468,7 @@ public class DBHandler {
         }
         return ent;
     }
+
     /**
      * borraEntrevista(id) funcion qie borra un entrevista dado un id
      *
@@ -478,9 +494,9 @@ public class DBHandler {
         }
     }
     //</editor-fold>
-    
+
     //<editor-fold desc="Reportes">
-    public static Reporte reporte(String titulo,String universidad,String certificados,String nombreUsuario,String puesto) {
+    public static Reporte reporte(String titulo, String universidad, String certificados, String nombreUsuario, String puesto) {
         Reporte rep = null;
         if (con == null) {
             try {
@@ -492,7 +508,7 @@ public class DBHandler {
         Entrevista ent = null;
         try {
             Statement st = con.createStatement();
-            String sql;            
+            String sql;
             sql = "select a.nombre,a.titulo,a.universidad,a.certificados,"
                     + "c.nombre,a.puesto,(case when a.id in (select"
                     + " b.idCandidato from empleado) then 'empleado else candidato end)"
@@ -506,8 +522,8 @@ public class DBHandler {
             String nombreEntrevistador = results.getString(5);
             String p = results.getString(6);
             String estatus = results.getString(7);
-            
-            rep = new Reporte(nombre,tit,uni,cert,nombreEntrevistador,p,estatus);
+
+            rep = new Reporte(nombre, tit, uni, cert, nombreEntrevistador, p, estatus);
 
             st.close();
         } catch (SQLException ex) {
@@ -520,9 +536,10 @@ public class DBHandler {
     //<editor-fold desc="Usuario">
     /**
      * Funcion que realiza login
+     *
      * @param user
      * @param pass
-     * @return 
+     * @return
      */
     public static boolean getUser(String user, String pass) {
         if (con == null) {
@@ -546,9 +563,9 @@ public class DBHandler {
 
         return false;
     }
-    
-    public static ArrayList dameCandidatos(){
-        
+
+    public static ArrayList dameCandidatos() {
+
         if (con == null) {
             try {
                 createConnection();
@@ -562,18 +579,18 @@ public class DBHandler {
                 lista = new ArrayList<>();
                 ResultSet results = statement.executeQuery("Select * from candidato");
                 while (results.next()) {
-                    Candidato can = new Candidato(results.getInt("id"), 
+                    Candidato can = new Candidato(results.getInt("id"),
                             results.getString("nombre"),
-                            results.getString("email"), 
-                            results.getString("telefono"), 
-                            results.getString("direccion"), 
-                            results.getString("puesto"), 
-                            results.getString("estudios"), 
-                            results.getString("universidad"), 
-                            results.getString("titulo"), 
-                            results.getString("certificados"), 
-                            results.getInt("experiencia"), 
-                            results.getString("puestoAnterior"), 
+                            results.getString("email"),
+                            results.getString("telefono"),
+                            results.getString("direccion"),
+                            results.getString("puesto"),
+                            results.getString("estudios"),
+                            results.getString("universidad"),
+                            results.getString("titulo"),
+                            results.getString("certificados"),
+                            results.getInt("experiencia"),
+                            results.getString("puestoAnterior"),
                             results.getInt("expectativaSalario"));
                     lista.add(can);
                 }
@@ -585,15 +602,14 @@ public class DBHandler {
         }
         return null;
     }
-    
-    
+
     /**
      * actualiza password de usuario
+     *
      * @param email
-     * @param password 
+     * @param password
      */
-    public static void changePassword(String email,String password)
-    {
+    public static void changePassword(String email, String password) {
         if (con == null) {
             try {
                 createConnection();
@@ -613,7 +629,6 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       
     }
     //</editor-fold>
 }

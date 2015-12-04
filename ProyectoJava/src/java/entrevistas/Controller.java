@@ -48,6 +48,7 @@ public class Controller extends HttpServlet {
         String op = request.getParameter("operacion");
         HttpSession session = request.getSession();
         String url = "/Login.jsp";
+        System.out.println(op);
         if (op.equals("login")) {
             String usuario = request.getParameter("email");
             String pass = request.getParameter("pass");
@@ -63,24 +64,6 @@ public class Controller extends HttpServlet {
                 url = "/Home.jsp";
 
                 // TODO: editar de acuerdo a la tabla.
-            } else if (op.equals("editaCandidato")) {
-                String nombre = (String) session.getAttribute("nombre");
-                String correo = request.getParameter("correo");
-                String telefono = request.getParameter("telefono");
-                String dir = request.getParameter("direccion");
-                String carrera = request.getParameter("carrera");
-                String cert = request.getParameter("certificados");
-                String empresa = request.getParameter("empresa");
-                String necEconom = request.getParameter("economico");
-
-                // TODO: meter toda la info, creo que falta. 
-                // Creo que tambien falta en el editaCandidato.jsp
-                // no se como lo vayamos a manejar yet
-                Candidato c = new Candidato();
-
-                DBHandler.editaCandidato(c);
-
-                url = "/Home.jsp";
             } else if (op.equals("editaEmpleado")) {
 
                 int idEmpleado = Integer.valueOf(request.getParameter("idEmpleado"));
@@ -153,6 +136,31 @@ public class Controller extends HttpServlet {
                 request.setAttribute("lista", al);
                 url = "/editaCandidato.jsp";
             }
+        }
+        if (op.equals("editaCandidato")) {
+            int idCandidato = Integer.valueOf(request.getParameter("idCandidato"));
+            
+            String nombreC = request.getParameter("nombre");
+            String telefono = request.getParameter("telefono");
+            String correo = request.getParameter("email");
+            String dir = request.getParameter("direccion");
+            String puesto = request.getParameter("puestoAct");
+            String estudios = request.getParameter("estudios");
+            String titulo = request.getParameter("titulo");
+            String uni = request.getParameter("universidad");
+            String cert = request.getParameter("cert");
+            int exp = Integer.valueOf(request.getParameter("experiencia"));
+            String trabAnt = request.getParameter("trabajoAnt");
+            int salario = Integer.valueOf(request.getParameter("salario"));
+            Candidato c = new Candidato(idCandidato, nombreC, correo, telefono, dir, puesto, estudios, uni, titulo, cert, exp, trabAnt, salario);
+
+            DBHandler.editaCandidato(c);
+
+            url = "/candidatos.jsp?operacion=editar";
+        } else if(op.equals("borrarCandidato")){
+            int id = Integer.valueOf(request.getParameter("idCandidato"));
+            DBHandler.borraCandidato(id);
+            url = "/candidatos.jsp?operacion=borrar";
         }
         ServletContext sc = this.getServletContext();
         RequestDispatcher rd = sc.getRequestDispatcher(url);

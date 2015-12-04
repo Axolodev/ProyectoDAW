@@ -63,26 +63,25 @@
         </style>
         <script>
             var clientes = new Array();
-            <%
-                ArrayList<Candidato> al = (ArrayList) request.getAttribute("lista");
+            <%                ArrayList<Candidato> al = (ArrayList) request.getAttribute("lista");
                 int alLen = al.size();
-                for (int i = 0 ; i < alLen ; i++){
+                for (int i = 0; i < alLen; i++) {
                     out.print("clientes[" + i + "] = new Array(");
                     out.print(al.get(i).getIdCandidato() + ",\"");
-                    out.print(al.get(i).getNombreCandidato()+ "\",\"");
-                    out.print(al.get(i).getTelefono()+ "\",\"");
-                    out.print(al.get(i).getEmailCandidato()+ "\",\"");
-                    out.print(al.get(i).getDireccion().replaceAll("\\s+", " ")+ "\",\"");
-                    out.print(al.get(i).getPuesto()+ "\",\"");
-                    out.print(al.get(i).getEstudios()+ "\",\"");
-                    out.print(al.get(i).getTitulo()+ "\",\"");
-                    out.print(al.get(i).getUniversidad()+ "\",\"");
-                    out.print(al.get(i).getCertificados()+ "\",");
-                    out.print(al.get(i).getTimeExpereince()+ ",\"");
-                    out.print(al.get(i).getPuestoAnterior()+ "\",");
+                    out.print(al.get(i).getNombreCandidato() + "\",\"");
+                    out.print(al.get(i).getTelefono() + "\",\"");
+                    out.print(al.get(i).getEmailCandidato() + "\",\"");
+                    out.print(al.get(i).getDireccion().replaceAll("\\s+", " ") + "\",\"");
+                    out.print(al.get(i).getPuesto() + "\",\"");
+                    out.print(al.get(i).getEstudios() + "\",\"");
+                    out.print(al.get(i).getTitulo() + "\",\"");
+                    out.print(al.get(i).getUniversidad() + "\",\"");
+                    out.print(al.get(i).getCertificados() + "\",");
+                    out.print(al.get(i).getTimeExpereince() + ",\"");
+                    out.print(al.get(i).getPuestoAnterior() + "\",");
                     out.print(al.get(i).getExpectativaSalario());
                     out.print(");\n");
-            }%> 
+                }%>
 
             // Variables que se utilizaran
             var clientes_length = clientes.length;
@@ -133,7 +132,14 @@
                         var currentI = i;
                         return function () {
                             // funcion temporal para simular borrado de elemento
-                            console.log("elemento " + currentI + "borrado");
+                            $("#clientes tr:nth-child(" + (currentI + 2) + ")").hide();
+                            $.ajax({
+                                type: "GET",
+                                url: "Controller?operacion=borrarCandidato&idCandidato=" + clientes[currentI][0],
+                                success: function (data) {
+                                    console.log(data);
+                                }
+                            });
                         };
                     })();
 
@@ -143,20 +149,21 @@
 
             function editaDatos(indice) {
                 var form = document.getElementById("informacion_cliente");
-                
+
                 var elements = form.elements;
                 for (var i = 0, j = 0; i < elements.length; i++, j++) {
                     elements[i].readOnly = false;
                     elements[i].value = clientes[indice][j];
-                    if(i === 6 || i === 11) {
-                        j --;
+                    if (i === 6 || i === 11) {
+                        j--;
                     }
                 }
+                document.getElementById("idCandidato").value = clientes[indice][0];
             }
-            
+
             function deshabilitaForma() {
                 var form = document.getElementById("informacion_cliente");
-                
+
                 var elements = form.elements;
                 for (var i = 0; i < elements.length; i++) {
                     elements[i].readOnly = true;
@@ -178,11 +185,11 @@
                     <th>Editar</th>
                     <th>Borrar</th>
                 </tr>
-                
+
             </table>
             <br />
             <br />
-            <form id="informacion_cliente">
+            <form id="informacion_cliente" type="get">
                 <fieldset>
                     <legend>Datos Personales</legend>
                     <div class="inputs">
@@ -226,7 +233,8 @@
                 </fieldset>
                 <br/>
                 <br/>
-
+                <input type="hidden" id="idCandidato" name="idCandidato"/>
+                <input type="hidden" name="operacion" value="editaCandidato"> 
                 <button type="reset" onclick="deshabilitaForma()">Reset</button>
                 <button type="submit" >Guardar</button>
             </form>
@@ -235,25 +243,21 @@
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
+                    $(document).ready(function () {
+                        $("#informacion_cliente").submit(function (event) {
+                            event.preventDefault();
+                            console.log(1);
+                            $.ajax({
+                                type: "GET",
+                                url: "Controller?operacion=editaCandidato",
+                                data: $(this).serialize(),
+                                success: function (data) {
+                                    console.log(data);
+                                }
+                            });
 
-        $(document).ready(function () {
-            $("#informacion_cliente").submit(function (event) {
-                event.preventDefault();
-                console.log(1);
-                $.ajax({
-                    type: "POST",
-                    url: "candidatos.jsp?operacion=editar",
-                    data: $(this).serialize(),
-                    success: function (data) {
-                        console.log(data);
-                        if(data === "Editar"){
-                            deshabilitaForma();
-                        }
-                    }
-                });
-
-            });
-        });
+                        });
+                    });
 
     </script>
 
